@@ -1,7 +1,13 @@
-export const colors = {
-  PRIMARY: "#3498db",
-  SECONDARY: "#2ecc71",
-  WARNING: "#e74c3c",
-  BACKGROUND: "#ecf0f1",
-  TEXT: "#2c3e50",
+export const lightThemeColors = {
+  primary: "#1d4ed8",
+  secondary: "#9333ea",
+  background: "#ffffff",
+  text: "#000000",
+};
+
+export const darkThemeColors = {
+  primary: "#ADD7F6",
+  secondary: "#c084fc",
+  background: "#1f2937",
+  text: "#ffffff",
 };

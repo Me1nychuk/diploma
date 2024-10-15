@@ -1,7 +1,5 @@
 import type { Config } from "tailwindcss";
 
-import { colors } from "./shared/constants/color.constants";
-
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,8 +7,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors,
-    extend: {},
+    extend: {
+      colors: {
+        background: "var(--background)",
+        text: "var(--text)",
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
+      },
+    },
   },
   plugins: [],
   darkMode: "class",

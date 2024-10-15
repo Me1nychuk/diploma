@@ -1,0 +1,14 @@
+/* theme.scss */
+:root {
+  --background: #ffffff;
+  --text: #000000;
+  --primary: #1d4ed8;
+  --secondary: #9333ea;
+}
+
+html.dark {
+  --background: #1f2937;
+  --text: #ffffff;
+  --primary: #2563eb;
+  --secondary: #c084fc;
+}

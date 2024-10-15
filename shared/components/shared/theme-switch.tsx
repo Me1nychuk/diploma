@@ -13,13 +13,13 @@ export const ThemeSwitch = () => {
   }, []);
 
   if (!mounted) {
-    return <p className="text-red-500 bg-BACKGROUND">here must be some btn</p>;
+    return <p className="text-red-500 bg-primary">here must be some btn</p>;
   }
 
   if (resolvedTheme === "dark") {
     return (
       <button
-        className="bg-BACKGROUND color-TEXT"
+        className="bg-primary color-secondary "
         onClick={() => setTheme("light")}
       >
         to light
@@ -28,10 +28,7 @@ export const ThemeSwitch = () => {
   }
   if (resolvedTheme === "light") {
     return (
-      <button
-        className="bg-TEXT color-BACKGROUND"
-        onClick={() => setTheme("dark")}
-      >
+      <button className=" " onClick={() => setTheme("dark")}>
         to dark
       </button>
     );
