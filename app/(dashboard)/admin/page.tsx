@@ -1,5 +1,10 @@
 import React from "react";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "NUWM | Admin panel",
+  description: ", ..",
+};
 const AdminPage: React.FC = () => {
   return (
     <>

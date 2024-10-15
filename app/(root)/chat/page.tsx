@@ -1,4 +1,10 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NUWM | Live chat",
+  description: ", ..",
+};
 
 const ChatPage: React.FC = () => {
   return (

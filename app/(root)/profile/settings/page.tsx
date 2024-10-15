@@ -1,4 +1,10 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NUWM | Settings",
+  description: ", ..",
+};
 
 const ProfileSettingsPage: React.FC = () => {
   return (

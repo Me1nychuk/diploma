@@ -1,4 +1,10 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NUWM | About us",
+  description: ", ..",
+};
 
 const AboutPage: React.FC = () => {
   return (
