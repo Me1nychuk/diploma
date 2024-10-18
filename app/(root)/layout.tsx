@@ -1,3 +1,4 @@
+import { Header } from "@/shared/components/shared";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,7 +15,8 @@ export default function HomeLayout({
 }>) {
   return (
     <>
-      <main className="min-h-screen">
+      <Header />
+      <main>
         {modal}
         {children}
       </main>

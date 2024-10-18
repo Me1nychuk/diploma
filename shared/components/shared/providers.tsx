@@ -13,14 +13,14 @@ interface ProvidersProps {
 }
 export const Providers = ({ children }: ProvidersProps) => {
   return (
-    <>
+    <div className=" relative z-10">
       <Provider store={store}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <NextTopLoader />
+          <Toaster position="top-right" reverseOrder={false} />
         </ThemeProvider>
-        <NextTopLoader />
-        <Toaster position="top-right" reverseOrder={false} />
       </Provider>
-    </>
+    </div>
   );
 };

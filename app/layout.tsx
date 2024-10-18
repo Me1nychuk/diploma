@@ -1,6 +1,7 @@
 import { Nunito } from "next/font/google";
 import "./globals.scss";
-import { Providers } from "@/shared/components/shared/providers";
+import { Background, Providers } from "@/shared/components/shared";
+import { cn } from "@/shared/lib/utils";
 
 const nunito = Nunito({
   subsets: ["cyrillic"],
@@ -16,7 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head></head>
-      <body className={nunito.className}>
+      <body className={cn("min-h-screen bg-main-background", nunito.className)}>
+        <Background />
         <Providers>{children}</Providers>
       </body>
     </html>

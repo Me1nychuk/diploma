@@ -1,0 +1,38 @@
+@use "../utils/mixins" as mx;
+
+.glass {
+  @apply bg-glass;
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.7px);
+  border: 1px solid rgba(255, 255, 255, 0.19);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gradient {
+  --size: 750px;
+  --speed: 45s;
+  --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+
+  @include mx.mq("lg", "max") {
+    --size: 700px;
+  }
+  @include mx.mq("md", "max") {
+    --size: 350px;
+  }
+
+  width: var(--size);
+  height: var(--size);
+  filter: blur(calc(var(--size) / 5));
+  background-image: linear-gradient(hsl(222, 84, 60, 100%), hsl(164, 79, 71));
+  animation: rotate var(--speed) var(--easing) infinite;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}

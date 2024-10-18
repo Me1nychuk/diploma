@@ -1,14 +1,19 @@
 /* theme.scss */
 :root {
-  --background: #ffffff;
+  --main-background: #071c39;
+  --background: #f9f7f7;
   --text: #000000;
-  --primary: #1d4ed8;
-  --secondary: #9333ea;
+  --primary: #dbe2ef;
+  --secondary: #3f72af;
+  --tertiary: #112d4e;
+  --accent: #ff7b00;
+  --glass: #ff00004f;
 }
 
 html.dark {
-  --background: #1f2937;
-  --text: #ffffff;
-  --primary: #2563eb;
-  --secondary: #c084fc;
+  --background: #1b262c;
+  --text: #f4f4f4;
+  --primary: #0f4c75;
+  --secondary: #3282b8;
+  --tertiary: #bbe1fa;
 }

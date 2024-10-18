@@ -5,6 +5,16 @@
 @import "../shared/styles/theme.scss";
 @import "../shared/styles/main.scss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   @apply bg-background text-text;
   font-family: Arial, Helvetica, sans-serif;
