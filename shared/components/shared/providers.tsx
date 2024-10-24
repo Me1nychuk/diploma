@@ -13,7 +13,7 @@ interface ProvidersProps {
 }
 export const Providers = ({ children }: ProvidersProps) => {
   return (
-    <div className=" relative z-10">
+    <div className="flex-1 flex relative z-10 min-h-full">
       <Provider store={store}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}

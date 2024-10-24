@@ -1,8 +1,9 @@
 "use client";
 
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
-// necessary - change this component
+import { Skeleton } from "../ui";
 
 export const ThemeSwitch = () => {
   const [mounted, setMounted] = React.useState(false);
@@ -13,24 +14,19 @@ export const ThemeSwitch = () => {
   }, []);
 
   if (!mounted) {
-    return <p className="text-red-500 bg-primary">here must be some btn</p>;
+    return <Skeleton className="w-[20px] h-[20px] rounded-full" />;
   }
 
-  if (resolvedTheme === "dark") {
-    return (
-      <button
-        className="bg-primary color-secondary "
-        onClick={() => setTheme("light")}
-      >
-        to light
-      </button>
-    );
-  }
-  if (resolvedTheme === "light") {
-    return (
-      <button className=" " onClick={() => setTheme("dark")}>
-        to dark
-      </button>
-    );
-  }
+  return (
+    <button
+      className="relative text-text hover:opacity-75 active:translate-y-[2px]  h-5 w-5 rounded-full  block focus:outline-none"
+      onClick={() => setTheme("dark" === resolvedTheme ? "light" : "dark")}
+    >
+      {resolvedTheme === "dark" ? (
+        <Moon color="currentColor" size={20} />
+      ) : (
+        <Sun size={20} />
+      )}
+    </button>
+  );
 };

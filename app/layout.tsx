@@ -17,10 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head></head>
-      <body className={cn("min-h-screen bg-main-background", nunito.className)}>
-        <Background />
+      <body
+        className={cn(
+          "min-h-screen   bg-main-background py-6 flex",
+          nunito.className
+        )}
+      >
         <Providers>{children}</Providers>
       </body>
+      <Background />
     </html>
   );
 }
