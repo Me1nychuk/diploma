@@ -2,16 +2,20 @@
 :root {
   --main-background: #071c39;
   --background: #f9f7f7;
+  --background-transparent: #f9f7f75e;
+  --background-transparent-2: #f9f7f7e0;
   --text: #000000;
   --primary: #dbe2ef;
   --secondary: #3f72af;
   --tertiary: #112d4e;
   --accent: #ff7b00;
-  --glass: #ff00004f;
+  --special: #1062dc;
 }
 
 html.dark {
   --background: #1b262c;
+  --background-transparent: #1b262c89;
+  --background-transparent-2: #1b262ce0;
   --text: #f4f4f4;
   --primary: #0f4c75;
   --secondary: #3282b8;

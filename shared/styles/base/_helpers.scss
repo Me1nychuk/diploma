@@ -1,11 +1,10 @@
 @use "../utils/mixins" as mx;
 
 .glass {
-  @apply bg-glass;
+  @apply bg-background-transparent;
 
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.7px);
-  border: 1px solid rgba(255, 255, 255, 0.19);
 }
 
 @keyframes rotate {
