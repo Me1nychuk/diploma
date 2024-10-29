@@ -8,18 +8,42 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      "max-xxs": { max: "374.7px" },
-      "min-xxs": { min: "375px" },
-      "max-xs": { max: "479.7px" },
-      "min-xs": { min: "480px" },
-      "max-sm": { max: "767.7px" },
-      "min-sm": { min: "768px" },
-      "max-md": { max: "991.7px" },
-      "min-md": { min: "992px" },
-      "max-lg": { max: "1199.7px" },
-      "min-lg": { min: "1200px" },
-      "max-xl": { max: "1399.7px" },
-      "min-xl": { min: "1400px" },
+      "max-xxs": {
+        max: "374.7px",
+      },
+      "min-xxs": {
+        min: "375px",
+      },
+      "max-xs": {
+        max: "479.7px",
+      },
+      "min-xs": {
+        min: "480px",
+      },
+      "max-sm": {
+        max: "767.7px",
+      },
+      "min-sm": {
+        min: "768px",
+      },
+      "max-md": {
+        max: "991.7px",
+      },
+      "min-md": {
+        min: "992px",
+      },
+      "max-lg": {
+        max: "1199.7px",
+      },
+      "min-lg": {
+        min: "1200px",
+      },
+      "max-xl": {
+        max: "1399.7px",
+      },
+      "min-xl": {
+        min: "1400px",
+      },
     },
     extend: {
       colors: {
@@ -30,6 +54,7 @@ const config: Config = {
         text: "var(--text)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        tertiary: "var(--tertiary)",
         accent: "var(--accent)",
         special: "var(--special)",
         border: "hsl(var(--border))",
@@ -50,12 +75,20 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
       },
       animation: {

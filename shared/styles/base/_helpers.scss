@@ -25,7 +25,7 @@
     --size: 700px;
   }
   @include mx.mq("md", "max") {
-    --size: 350px;
+    --size: 500px;
   }
 
   width: var(--size);
@@ -34,4 +34,8 @@
   background-image: linear-gradient(hsl(222, 84, 60, 100%), hsl(164, 79, 71));
   animation: rotate var(--speed) var(--easing) infinite;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.underline-custom {
+  @apply relative inline-block  after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-text after:transition-all after:duration-300 hover:after:w-full hover:after:h-[2px] after:rounded-s-3xl;
 }

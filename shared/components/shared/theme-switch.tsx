@@ -19,7 +19,7 @@ export const ThemeSwitch = () => {
 
   return (
     <button
-      className="relative text-text hover:opacity-75 active:translate-y-[2px]  h-5 w-5 rounded-full  block focus:outline-none"
+      className="relative block text-text hover:opacity-75 active:translate-y-[2px]  h-5 w-5 rounded-full   focus:outline-none"
       onClick={() => setTheme("dark" === resolvedTheme ? "light" : "dark")}
     >
       {resolvedTheme === "dark" ? (

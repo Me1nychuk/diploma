@@ -1,3 +1,4 @@
+export { Accordion } from "./accordion";
 export { Breadcrumb } from "./breadcrumb";
 export { Button } from "./button";
 export { Calendar } from "./calendar";
@@ -19,3 +20,4 @@ export { Sheet } from "./sheet";
 export { Skeleton } from "./skeleton";
 export { Switch } from "./switch";
 export { Tooltip } from "./tooltip";
+export { LogoIcon } from "./logo";
