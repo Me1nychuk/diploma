@@ -1,6 +1,5 @@
-import { Container } from "@/shared/components/shared";
+import { Container, CustomCarousel } from "@/shared/components/shared";
 import { ThemeSwitch } from "@/shared/components/shared/theme-switch";
-import { Skeleton } from "@/shared/components/ui";
 
 import Link from "next/link";
 import React from "react";
@@ -8,7 +7,9 @@ import React from "react";
 const Home: React.FC = () => {
   return (
     <Container className="h-full">
-      <p className="mt-50 h-40 text-4xl ">Homepage</p>
+      <div className="grid place-items-center mb-5 max-w-[280px] ">
+        <CustomCarousel />
+      </div>
 
       <ThemeSwitch />
 
