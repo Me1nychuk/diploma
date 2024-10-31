@@ -6,3 +6,5 @@ export { Background } from "@/shared/components/shared/background";
 export { Container } from "@/shared/components/shared/container";
 export { Navbar } from "./navbar";
 export { CustomCarousel } from "./custom-carousel";
+export { HeroSection } from "./hero-section";
+export { MiniGallery } from "./mini-gallery";

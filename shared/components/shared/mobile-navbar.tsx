@@ -24,13 +24,12 @@ export const MobileNavbar = ({
   className,
   admin = false,
 }: MobileNavbarProps) => {
-  const [isOpen, setIsOpen] = React.useState(false); // Стан для контролю відкриття шита
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
   return (
     <>
-      <Sheet open={isOpen} onOpenChange={handleOpen}>
+      <Sheet open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
         <SheetTrigger asChild>
           <Menu
             color="currentColor"
@@ -119,15 +118,17 @@ export const MobileNavbar = ({
                   </ul>
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-1">
-                <Link
-                  href="/admin"
-                  className="w-full block text-base py-4"
-                  onClick={handleClose}
-                >
-                  Admin
-                </Link>
-              </AccordionItem>
+              {admin && (
+                <AccordionItem value="item-1">
+                  <Link
+                    href="/admin"
+                    className="w-full block text-base py-4"
+                    onClick={handleClose}
+                  >
+                    Admin
+                  </Link>
+                </AccordionItem>
+              )}
             </Accordion>
           </div>
         </SheetContent>
