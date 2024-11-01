@@ -11,3 +11,5 @@ export { InfoBlock } from "./info-block";
 
 // Main page
 export { HeroSection, Greetings } from "./main-page";
+// About us
+export { AboutUsContent } from "./about-us";
