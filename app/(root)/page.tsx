@@ -5,9 +5,11 @@ import React from "react";
 
 const Home: React.FC = () => {
   return (
-    <Container className="h-full">
+    <Container className="max-w-full h-full">
       <HeroSection />
+
       <Greetings />
+
       <Link href="/users/1">Users</Link>
     </Container>
   );

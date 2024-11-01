@@ -19,13 +19,12 @@ export const InfoBlock = ({
   alt,
   right = false,
   size = 120,
-  width,
+
   contentClassName,
 }: InfoBlockProps) => {
   return (
     <>
       <div
-        style={{ width: width ? `${width}px` : "auto" }}
         className={cn(
           "flex gap-1 max-sm:flex-col items-center  mr-0 max-w-full max-sm:w-full mb-5 text-sm",
           right && "flex-row-reverse max-sm:flex-col-reverse ml-auto",

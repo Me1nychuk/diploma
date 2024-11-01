@@ -3,10 +3,8 @@ import React from "react";
 import { animated } from "@react-spring/web";
 import { InfoBlock } from "@/shared/components/shared";
 import { useFadeInAnimation } from "@/shared/hooks";
-interface GreetingsProps {
-  className?: string;
-}
-export const Greetings = ({ className }: GreetingsProps) => {
+
+export const Greetings = () => {
   const { ref: ref1, styles: styles1 } = useFadeInAnimation();
   const { ref: ref2, styles: styles2 } = useFadeInAnimation();
   const { ref: ref3, styles: styles3 } = useFadeInAnimation();
@@ -18,8 +16,8 @@ export const Greetings = ({ className }: GreetingsProps) => {
           url="/lion/1.png"
           alt="Lion"
           size={200}
-          width={500}
-          contentClassName=" bg-background p-3 rounded-xl custom-shadow"
+          className="w-[500px]"
+          contentClassName=" bg-background p-3 rounded-xl custom-shadow "
         >
           <p className=" ">
             Наша кафедра є частиною Національного університету водного
@@ -35,8 +33,8 @@ export const Greetings = ({ className }: GreetingsProps) => {
           url="/lion/2.png"
           alt="Lion"
           size={200}
-          width={500}
           right
+          className="w-[500px]"
           contentClassName=" bg-background p-3 rounded-xl custom-shadow"
         >
           <p>
@@ -51,7 +49,7 @@ export const Greetings = ({ className }: GreetingsProps) => {
           url="/lion/3.png"
           alt="Lion"
           size={200}
-          width={500}
+          className="w-[500px]"
           contentClassName=" bg-background p-3 rounded-xl custom-shadow"
         >
           <p>
@@ -68,7 +66,7 @@ export const Greetings = ({ className }: GreetingsProps) => {
           url="/lion/4.png"
           alt="Lion"
           size={200}
-          width={500}
+          className="w-[500px]"
           right
           contentClassName=" bg-background p-3 rounded-xl custom-shadow"
         >
