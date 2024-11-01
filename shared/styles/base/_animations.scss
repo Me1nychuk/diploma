@@ -1,0 +1,39 @@
+@keyframes floating-1 {
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating-1 {
+  display: inline-block;
+  animation: floating-1 5s ease-in-out infinite;
+}
+
+@keyframes floating-2 {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating-2 {
+  display: inline-block;
+  animation: floating-2 3s ease-in-out infinite;
+}
