@@ -57,8 +57,8 @@ export const MobileNavbar = ({
                 <AccordionContent>
                   <ul className="nav-list">
                     <li>
-                      <Link href="/chat" onClick={handleClose}>
-                        Живий чат
+                      <Link href="/about" onClick={handleClose}>
+                        Про нас
                       </Link>
                     </li>
                     <li>
