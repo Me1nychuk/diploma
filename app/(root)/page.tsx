@@ -1,4 +1,4 @@
-import { Container, HeroSection } from "@/shared/components/shared";
+import { Container, Greetings, HeroSection } from "@/shared/components/shared";
 
 import Link from "next/link";
 import React from "react";
@@ -6,8 +6,8 @@ import React from "react";
 const Home: React.FC = () => {
   return (
     <Container className="h-full">
-      <HeroSection className="" />
-
+      <HeroSection />
+      <Greetings />
       <Link href="/users/1">Users</Link>
     </Container>
   );

@@ -17,7 +17,7 @@ interface HeaderProps {
 }
 export const Header = ({ className, admin, clear }: HeaderProps) => {
   const { width } = useWindowSize();
-
+  const logoSize = width < 375 ? 40 : width < 768 ? 30 : 40;
   return (
     <>
       <header
@@ -34,8 +34,8 @@ export const Header = ({ className, admin, clear }: HeaderProps) => {
             className="rounded-full border-[1px] border-special"
             src="/logo.png"
             alt="logo"
-            width={width < 375 ? 40 : width < 768 ? 30 : 40}
-            height={width < 375 ? 40 : width < 768 ? 30 : 40}
+            width={logoSize}
+            height={logoSize}
           />
           {width >= 375 && (
             <div className="flex flex-col">

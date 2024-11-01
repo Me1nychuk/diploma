@@ -56,6 +56,7 @@ const config: Config = {
         secondary: "var(--secondary)",
         tertiary: "var(--tertiary)",
         accent: "var(--accent)",
+        shadow: "var(--shadow)",
         special: "var(--special)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

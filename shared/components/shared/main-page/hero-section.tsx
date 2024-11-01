@@ -2,8 +2,8 @@
 import { cn } from "@/shared/lib/utils";
 import { Typewriter } from "react-simple-typewriter";
 import React from "react";
-import { LogoIcon } from "../ui";
-import { MiniGallery } from "./mini-gallery";
+import { LogoIcon } from "../../ui";
+import { MiniGallery } from "../mini-gallery";
 
 interface HeroSectionProps {
   className?: string;
