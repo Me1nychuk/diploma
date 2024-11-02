@@ -14,7 +14,7 @@ export const AboutUsContent = () => {
 
   return (
     <>
-      <div className="pt-[85px]">
+      <div>
         <h1 className=" text-4xl text-center font-bold mb-5">Про нас</h1>
         <div className="relative max-w-[80%] mx-auto min-sm:w-[60%]">
           <Image

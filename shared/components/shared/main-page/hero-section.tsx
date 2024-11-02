@@ -30,7 +30,7 @@ export const HeroSection = ({
 }: HeroSectionProps) => {
   return (
     <div className={cn("pt-5 mb-5 ", className)}>
-      <div className="relative  w-full h-[calc(100vh-145px)] max-h-[970px] mt-[95px]  pl-5 min-md:pr-10 mb-5 text-3xl min-sm:text-5xl min-md:text-7xl  font-bold text-tertiary flex justify-between border-b-2 border-text border-opacity-45  ">
+      <div className="relative  w-full h-[calc(100vh-145px)] max-h-[970px]  pl-5 min-md:pr-10 mb-5 text-3xl min-sm:text-5xl min-md:text-7xl  font-bold text-tertiary flex justify-between border-b-2 border-text border-opacity-45  ">
         <div className="max-w-[70%] min-w-[70%] max-md:w-full  ">
           <Typewriter
             cursorColor="lightBlue"
