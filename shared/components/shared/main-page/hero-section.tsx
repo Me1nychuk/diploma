@@ -4,6 +4,8 @@ import { Typewriter } from "react-simple-typewriter";
 import React from "react";
 import { LogoIcon } from "../../ui";
 import { MiniGallery } from "../mini-gallery";
+import { ChevronsDown } from "lucide-react";
+import Link from "next/link";
 
 interface HeroSectionProps {
   className?: string;
@@ -28,7 +30,7 @@ export const HeroSection = ({
 }: HeroSectionProps) => {
   return (
     <div className={cn("pt-5 mb-5 ", className)}>
-      <div className="w-full min-h-  pl-5 min-md:pr-10 mb-5 text-3xl min-sm:text-5xl min-md:text-7xl  font-bold text-tertiary flex justify-between border-b-2 border-text border-opacity-45   h-[600px] min-md:h-[700px]">
+      <div className="relative  w-full h-[calc(100vh-145px)] max-h-[970px] mt-[95px]  pl-5 min-md:pr-10 mb-5 text-3xl min-sm:text-5xl min-md:text-7xl  font-bold text-tertiary flex justify-between border-b-2 border-text border-opacity-45  ">
         <div className="max-w-[70%] min-w-[70%] max-md:w-full  ">
           <Typewriter
             cursorColor="lightBlue"
@@ -43,9 +45,18 @@ export const HeroSection = ({
           <LogoIcon size={450} />
           <p className=" text-text text-3xl">NUWM</p>
         </div>
+        <Link
+          href={"#hero-section"}
+          className=" absolute left-1/2  bottom-4  bounce-custom "
+        >
+          <ChevronsDown color="currentColor" size={50} />
+        </Link>
       </div>
       <MiniGallery />
-      <h1 className="text-3xl font-bold text-center underline italic">
+      <h1
+        className="text-3xl font-bold text-center underline italic"
+        id="hero-section"
+      >
         Кафедра обчислень: Ваш старт у світ технологій
       </h1>
     </div>

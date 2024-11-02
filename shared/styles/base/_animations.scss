@@ -37,3 +37,20 @@
   display: inline-block;
   animation: floating-2 3s ease-in-out infinite;
 }
+
+@keyframes bounce-custom {
+  0% {
+    transform: translate(-50%, 0px);
+  }
+  50% {
+    transform: translate(-50%, 20px);
+  }
+  100% {
+    transform: translate(-50%, 0px);
+  }
+}
+
+.bounce-custom {
+  display: inline-block;
+  animation: bounce-custom 2s ease-in-out infinite;
+}
