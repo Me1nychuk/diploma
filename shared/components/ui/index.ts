@@ -21,3 +21,4 @@ export { Skeleton } from "./skeleton";
 export { Switch } from "./switch";
 export { Tooltip } from "./tooltip";
 export { LogoIcon } from "./logo";
+export { InputWithState } from "./input-with-state";

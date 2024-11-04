@@ -8,6 +8,9 @@ export { Navbar } from "./navbar";
 export { CustomCarousel } from "./custom-carousel";
 export { MiniGallery } from "./mini-gallery";
 export { InfoBlock } from "./info-block";
+export { SelectSortType } from "./select-sort-type";
+export { NewsItem } from "./news-item";
+export { NewsBlock } from "./news-block";
 
 // Main page
 export { HeroSection, Greetings } from "./main-page";
