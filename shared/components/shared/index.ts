@@ -17,3 +17,5 @@ export { Pagination } from "./pagination";
 export { HeroSection, Greetings } from "./main-page";
 // About us
 export { AboutUsContent } from "./about-us";
+// Authentication
+export { RegisterForm, LoginForm } from "./auth";
