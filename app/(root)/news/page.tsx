@@ -1,15 +1,24 @@
+"use client";
 import React from "react";
-import type { Metadata } from "next";
 import { Input } from "@/shared/components/ui";
 
-import { NewsBlock, SelectSortType } from "@/shared/components/shared";
+import {
+  NewsBlock,
+  Pagination,
+  SelectSortType,
+} from "@/shared/components/shared";
+import { Search } from "lucide-react";
+import { usePagination } from "@/shared/hooks/usePagination";
 
-export const metadata: Metadata = {
-  title: "NUWM | News",
-  description: "Новини кафедри, останні події, додаткова інформація",
-};
+const array = Array.from({ length: 30 }, (_, index) => ({ id: index + 1 }));
 
 const News: React.FC = () => {
+  const { pagination, nextPage, previousPage, changeTotalPages } =
+    usePagination();
+  React.useEffect(() => {
+    changeTotalPages(Math.ceil(array.length / pagination.per_page));
+  }, [pagination.per_page]);
+
   return (
     <>
       <div className="">
@@ -30,6 +39,28 @@ const News: React.FC = () => {
           </div>
           <div className="border-blue-500 border-2">
             <NewsBlock />
+          </div>
+          <Pagination
+            hasNextPage={pagination.hasNextPage}
+            hasPrevPage={pagination.hasPrevPage}
+            totalPages={pagination.totalPages}
+            page={pagination.page}
+            nextPage={nextPage}
+            previousPage={previousPage}
+          />
+          <div className="flex justify-center gap-2">
+            {array
+              .slice(
+                pagination.page === 1
+                  ? 0
+                  : (pagination.page - 1) * pagination.per_page,
+                pagination.page === 1
+                  ? pagination.per_page
+                  : pagination.page * pagination.per_page
+              )
+              .map((id) => (
+                <p key={id.id}>{id.id}</p>
+              ))}
           </div>
         </div>
       </div>

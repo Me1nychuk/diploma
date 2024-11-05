@@ -11,6 +11,7 @@ export { InfoBlock } from "./info-block";
 export { SelectSortType } from "./select-sort-type";
 export { NewsItem } from "./news-item";
 export { NewsBlock } from "./news-block";
+export { Pagination } from "./pagination";
 
 // Main page
 export { HeroSection, Greetings } from "./main-page";
