@@ -1,3 +1,4 @@
+export { NewsPageContent } from "./news-page-content";
 export { MobileNavbar } from "./mobile-navbar";
 export { Providers } from "@/shared/components/shared/providers";
 export { ThemeSwitch } from "@/shared/components/shared/theme-switch";
