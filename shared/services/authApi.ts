@@ -37,24 +37,30 @@ export const registerUser = async ({
 export const loginUser = async ({
   email,
   password,
-}: Pick<User, "email" | "password">) => {
+}: {
+  email: string;
+  password: string;
+}) => {
   try {
     const response = await axiosInstance.post("/auth/login", {
       email,
       password,
     });
-    return response.data;
+    return {
+      statusCode: response.status,
+      data: response.data,
+    };
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       return {
         statusCode: error.response?.status || 500,
-        error: error.response?.data?.message || "User registration failed.",
+        error: error.response?.data?.message || "User login failed.",
       };
     }
 
     return {
       statusCode: 500,
-      error: "User registration failed. Something went wrong.",
+      error: "User login failed. Something went wrong.",
     };
   }
 };

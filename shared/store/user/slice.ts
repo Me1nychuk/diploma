@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiRegisterUser } from "./operations";
-import { User } from "@/types";
+import { jwtDecode } from "jwt-decode";
+import { apiLoginUser, apiRegisterUser } from "./operations";
+import { JWTPayload } from "@/types";
 
 export interface currentUserState {
-  currentUser: User | undefined;
+  currentUser: JWTPayload | undefined;
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
@@ -43,6 +44,25 @@ const slice = createSlice({
       })
       .addCase(apiRegisterUser.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(apiLoginUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
+        state.errorMessage = "";
+      })
+      .addCase(apiLoginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.token = action.payload.accessToken;
+        const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken);
+        state.currentUser = {
+          id: decodedToken.id,
+          email: decodedToken.email,
+          role: decodedToken.role,
+          fullname: decodedToken.fullname,
+          isVerified: decodedToken.isVerified,
+          isBlocked: decodedToken.isBlocked,
+        };
       }),
 });
 
