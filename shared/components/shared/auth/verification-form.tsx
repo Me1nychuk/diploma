@@ -4,6 +4,7 @@ import { verify } from "@/shared/services";
 import toast from "react-hot-toast";
 import { Button } from "../../ui";
 import { cn } from "@/shared/lib/utils";
+import Link from "next/link";
 
 interface VerificationProps {
   className?: string;
@@ -54,10 +55,25 @@ export const VerificationForm = ({ className, token }: VerificationProps) => {
       )}
 
       {isVerified === "не верифіковано" && (
-        <p className="text-gray-500 text-[10px]">
+        <p className="opacity-50 text-[10px]">
           *Ця пошта не була верифікована бо користувача з таким токеном не було
           знайдено, або він не існує.
         </p>
+      )}
+
+      {isVerified === "верифіковано" && (
+        <>
+          <p className="opacity-50 text-[10px]">
+            *Ця пошта була верифікована, тепер ви можете зайти в свій аккаунт.
+          </p>
+
+          <Link
+            href="/login"
+            className=" text-[10px] opacity-50 hover:text-black active:text-black transition-all duration-200 active:translate-y-1 underline"
+          >
+            Увійти в профіль
+          </Link>
+        </>
       )}
     </div>
   );
