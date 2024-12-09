@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { sliceReducer } from "./template/slice";
 import { TypedUseSelectorHook, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { currentUserReducer } from "./user/slice";
 
 const store = configureStore({
   reducer: {
     field: sliceReducer,
+    user: currentUserReducer,
   },
 });
 
