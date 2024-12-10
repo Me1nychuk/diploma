@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Button, Label, LogoIcon } from "@/shared/components/ui";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { apiLoginUser } from "@/shared/store/user/operations";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Schema = Yup.object().shape({
   email: Yup.string()
@@ -34,6 +35,9 @@ interface LoginFormProps {
 export const LoginForm = ({}: LoginFormProps) => {
   const dispatch = useAppDispatch();
   const { isLoading, currentUser } = useAppSelector((state) => state.user);
+  const router = useRouter();
+
+
   const handleSubmit = (
     values: Credentials,
     actions: FormikHelpers<Credentials>
@@ -44,8 +48,21 @@ export const LoginForm = ({}: LoginFormProps) => {
         password: values.password,
       })
     );
+  
     actions.resetForm();
   };
+
+
+  useEffect(() => {
+     if (currentUser ) {
+       const timeout = setTimeout(() => {
+         router.replace("/");
+       }, 1500)
+       
+       return () => clearTimeout(timeout);
+    }
+  }, [currentUser, router]);
+
   return (
     <>
       {isLoading && <Loader2 className="animate-spin mx-auto my-5" size={40} />}
