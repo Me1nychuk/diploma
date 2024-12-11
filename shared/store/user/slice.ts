@@ -30,6 +30,18 @@ const slice = createSlice({
       state.errorMessage = "";
       state.isLoading = false;
     },
+    updateToken: (state, action) => {
+      state.token = action.payload;
+      const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken.split(" ")[1]);
+        state.currentUser = {
+          id: decodedToken.id,
+          email: decodedToken.email,
+          role: decodedToken.role,
+          fullname: decodedToken.fullname,
+          isVerified: decodedToken.isVerified,
+          isBlocked: decodedToken.isBlocked,
+        };
+     }
   },
   extraReducers: (builder) =>
     builder
@@ -54,7 +66,7 @@ const slice = createSlice({
       .addCase(apiLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.accessToken;
-        const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken);
+        const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken.split(" ")[1]);
         state.currentUser = {
           id: decodedToken.id,
           email: decodedToken.email,
@@ -66,6 +78,6 @@ const slice = createSlice({
       }),
 });
 
-export const {} = slice.actions;
+export const { clearCurrentUser, updateToken } = slice.actions;
 
 export const currentUserReducer = slice.reducer;

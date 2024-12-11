@@ -1,6 +1,6 @@
 import { ApiResponse, User } from "@/types";
 import axios from "axios";
-import { axiosInstance } from "./axiosInstance";
+import { axiosInstance, setToken } from "./axiosInstance";
 
 export const registerUser = async ({
   email,
@@ -46,6 +46,8 @@ export const loginUser = async ({
       email,
       password,
     });
+
+    setToken(response.data.accessToken);
     return {
       statusCode: response.status,
       data: response.data,
