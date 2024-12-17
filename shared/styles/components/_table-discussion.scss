@@ -1,0 +1,13 @@
+.table-discussion{
+    border: 1px solid var(--text);
+    border-radius: 3px;
+    
+    tr{
+        border: 1px solid var(--text);
+    }
+    th,td{
+        padding: 5px;
+        text-align: center;
+        border: 1px solid var(--text);
+    }
+}

@@ -1,17 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
+import ProfileContent from "@/shared/components/shared/profile-content";
 
 export const metadata: Metadata = {
   title: "NUWM | Profile",
-  description: ", ..",
+  description: "Profile information",
 };
 
 const ProfilePage: React.FC = () => {
   return (
     <>
-      <div className="bg-background  grid  place-items-center">
-        <p className="mt-50 text-4xl">ProfilePage page</p>
-      </div>
+     <ProfileContent/>
     </>
   );
 };
