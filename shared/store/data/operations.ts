@@ -1,5 +1,22 @@
-import { fetchUsers } from "@/shared/services";
-import { News, PaginatedResponse, User } from "@/types";
+import {
+  CommentParameters,
+  DiscussionParameters,
+  fetchComments,
+  fetchDiscussions,
+  fetchNews,
+  fetchOpinions,
+  fetchUsers,
+  NewsParameters,
+  OpinionParameters,
+} from "@/shared/services";
+import {
+  Comment,
+  Discussion,
+  News,
+  Opinion,
+  PaginatedResponse,
+  User,
+} from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
@@ -39,17 +56,89 @@ export const apiGetUsers = createAsyncThunk<
 
 export const apiGetNews = createAsyncThunk<
   PaginatedResponse<News>,
-  GetUsersPayload,
+  NewsParameters,
   { rejectValue: Error }
->("data/fetchUsers", async (dto, thunkAPI) => {
+>("data/fetchNews", async (dto, thunkAPI) => {
   try {
-    const res = await fetchUsers(dto);
+    const res = await fetchNews(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати користувачів", {
+      toast.error("Нажаль не вдалося отримати список новин", {
         duration: 2000,
       });
       return thunkAPI.rejectWithValue({
-        message: res.error || "Fetch users failed.",
+        message: res.error || "Fetch news failed.",
+        statusCode: res.statusCode,
+      });
+    }
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiGetComments = createAsyncThunk<
+  PaginatedResponse<Comment>,
+  CommentParameters,
+  { rejectValue: Error }
+>("data/fetchComments", async (dto, thunkAPI) => {
+  try {
+    const res = await fetchComments(dto);
+    if (res.statusCode !== 200) {
+      toast.error("Нажаль не вдалося отримати список новин", {
+        duration: 2000,
+      });
+      return thunkAPI.rejectWithValue({
+        message: res.error || "Fetch news failed.",
+        statusCode: res.statusCode,
+      });
+    }
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiGetDiscussions = createAsyncThunk<
+  PaginatedResponse<Discussion>,
+  DiscussionParameters,
+  { rejectValue: Error }
+>("data/fetchDiscussions", async (dto, thunkAPI) => {
+  try {
+    const res = await fetchDiscussions(dto);
+    if (res.statusCode !== 200) {
+      toast.error("Нажаль не вдалося отримати список обговорень", {
+        duration: 2000,
+      });
+      return thunkAPI.rejectWithValue({
+        message: res.error || "Fetch discussions failed.",
+        statusCode: res.statusCode,
+      });
+    }
+    return res.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiGetOpinions = createAsyncThunk<
+  PaginatedResponse<Opinion>,
+  OpinionParameters,
+  { rejectValue: Error }
+>("data/fetchOpinions", async (dto, thunkAPI) => {
+  try {
+    const res = await fetchOpinions(dto);
+    if (res.statusCode !== 200) {
+      toast.error("Нажаль не вдалося отримати список обговорень", {
+        duration: 2000,
+      });
+      return thunkAPI.rejectWithValue({
+        message: res.error || "Fetch discussions failed.",
         statusCode: res.statusCode,
       });
     }
