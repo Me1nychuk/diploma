@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { apiRegisterUser } from "@/shared/store/user/operations";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Schema = Yup.object().shape({
   fullName: Yup.string()
@@ -44,7 +45,11 @@ interface RegisterFormProps {
 }
 export const RegisterForm = ({}: RegisterFormProps) => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.user);
+ const { isLoading, currentUser } = useAppSelector((state) => state.user);
+  const router = useRouter();
+  if (currentUser) {
+     router.replace("/");
+  }
   const handleSubmit = (
     values: Credentials,
     actions: FormikHelpers<Credentials>

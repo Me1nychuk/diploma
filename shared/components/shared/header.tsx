@@ -9,6 +9,9 @@ import { useWindowSize } from "react-use";
 import { MobileNavbar, Navbar } from "@/shared/components/shared";
 
 import { ThemeSwitch } from "./theme-switch";
+import { useAppSelector } from "@/shared/store/store";
+import AuthLinks from "./auth-links ";
+import UserLabel from "./user-label";
 
 interface HeaderProps {
   className?: string;
@@ -16,6 +19,7 @@ interface HeaderProps {
   clear?: boolean;
 }
 export const Header = ({ className, admin, clear }: HeaderProps) => {
+  const { currentUser} = useAppSelector((state) => state.user)
   const { width } = useWindowSize();
   const logoSize = width < 375 ? 40 : width < 768 ? 30 : 40;
   return (
@@ -50,17 +54,10 @@ export const Header = ({ className, admin, clear }: HeaderProps) => {
 
         <div className="flex items-center gap-3">
           {!clear &&
-            (false ? (
-              <div className="h-5 w-5 bg-accent rounded-full cursor-pointer active:translate-y-1"></div>
+            (currentUser ? (
+            <UserLabel user={currentUser}/>
             ) : (
-              <div className={cn("flex ", width < 768 ? "flex-col" : "gap-2")}>
-                <Link href="/login" className="text-sm  underline-custom">
-                  Ввійти
-                </Link>
-                <Link href="/register" className="text-sm  underline-custom">
-                  Реєстрація
-                </Link>
-              </div>
+              <AuthLinks orientation={ width < 768} />
             ))}
           <ThemeSwitch />
           {width < 768 && <MobileNavbar admin={admin} />}

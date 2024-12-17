@@ -36,7 +36,11 @@ export const LoginForm = ({}: LoginFormProps) => {
   const dispatch = useAppDispatch();
   const { isLoading, currentUser } = useAppSelector((state) => state.user);
   const router = useRouter();
-
+  useEffect(() => {
+    if (currentUser) {
+      router.replace("/");
+    }
+  }, [currentUser, router]);
 
   const handleSubmit = (
     values: Credentials,
@@ -53,15 +57,7 @@ export const LoginForm = ({}: LoginFormProps) => {
   };
 
 
-  useEffect(() => {
-     if (currentUser ) {
-       const timeout = setTimeout(() => {
-         router.replace("/");
-       }, 1500)
-       
-       return () => clearTimeout(timeout);
-    }
-  }, [currentUser, router]);
+
 
   return (
     <>
@@ -110,7 +106,7 @@ export const LoginForm = ({}: LoginFormProps) => {
             </Button>
 
             {currentUser && currentUser?.fullname && (
-              <p className="text-lg font-bold text-secondary">
+              <p className="text-lg font-bold text-secondary text-center">
                 Вітаємо, {currentUser.fullname}!
               </p>
             )}
@@ -123,3 +119,4 @@ export const LoginForm = ({}: LoginFormProps) => {
     </>
   );
 };
+
