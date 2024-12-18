@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
-import { apiLoginUser, apiRegisterUser } from "./operations";
+import { apiLoginUser, apiLogoutUser, apiRegisterUser } from "./operations";
 import { JWTPayload } from "@/types";
 
 export interface currentUserState {
@@ -32,23 +32,24 @@ const slice = createSlice({
     },
     updateToken: (state, action) => {
       state.token = action.payload;
-      const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken.split(" ")[1]);
-        state.currentUser = {
-          id: decodedToken.id,
-          email: decodedToken.email,
-          role: decodedToken.role,
-          fullname: decodedToken.fullname,
-          isVerified: decodedToken.isVerified,
-          isBlocked: decodedToken.isBlocked,
-        };
-     }
+      const decodedToken = jwtDecode<JWTPayload>(
+        action.payload.accessToken.split(" ")[1]
+      );
+      state.currentUser = {
+        id: decodedToken.id,
+        email: decodedToken.email,
+        role: decodedToken.role,
+        fullname: decodedToken.fullname,
+        isVerified: decodedToken.isVerified,
+        isBlocked: decodedToken.isBlocked,
+      };
+    },
   },
   extraReducers: (builder) =>
     builder
       .addCase(apiRegisterUser.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
-        state.errorMessage = "";
         state.errorMessage = "";
       })
       .addCase(apiRegisterUser.fulfilled, (state) => {
@@ -61,12 +62,13 @@ const slice = createSlice({
         state.isLoading = true;
         state.isError = false;
         state.errorMessage = "";
-        state.errorMessage = "";
       })
       .addCase(apiLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.accessToken;
-        const decodedToken = jwtDecode<JWTPayload>(action.payload.accessToken.split(" ")[1]);
+        const decodedToken = jwtDecode<JWTPayload>(
+          action.payload.accessToken.split(" ")[1]
+        );
         state.currentUser = {
           id: decodedToken.id,
           email: decodedToken.email,
@@ -75,6 +77,28 @@ const slice = createSlice({
           isVerified: decodedToken.isVerified,
           isBlocked: decodedToken.isBlocked,
         };
+      })
+      .addCase(apiLoginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = "login failed";
+      })
+      .addCase(apiLogoutUser.fulfilled, (state) => {
+        state.currentUser = undefined;
+        state.token = undefined;
+        state.isError = false;
+        state.errorMessage = "";
+        state.isLoading = false;
+      })
+      .addCase(apiLogoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
+      })
+      .addCase(apiLogoutUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = "Failed to logout";
       }),
 });
 

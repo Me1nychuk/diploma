@@ -1,4 +1,4 @@
-import { loginUser, registerUser } from "@/shared/services";
+import { loginUser, logoutUser, registerUser } from "@/shared/services";
 import { User } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -54,7 +54,6 @@ export const apiLoginUser = createAsyncThunk<
   { rejectValue: RegisterUserError }
 >("currentUser/login", async (dto, thunkAPI) => {
   try {
-    console.log("inside of login");
     const response = await loginUser(dto);
     if (response.statusCode !== 201) {
       toast.error(
@@ -73,6 +72,34 @@ export const apiLoginUser = createAsyncThunk<
       duration: 2000,
     });
     return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiLogoutUser = createAsyncThunk<
+  { status: string },
+  void,
+  { rejectValue: RegisterUserError }
+>("currentUser/logout", async (_, thunkAPI) => {
+  try {
+    const response = await logoutUser();
+    if (response.statusCode !== 200) {
+      toast.error("Нажаль не вдалося вийти!  \n Причина: " + response.error, {
+        duration: 4000,
+      });
+      return thunkAPI.rejectWithValue({
+        message: response.error || "Logout failed.",
+        statusCode: response.statusCode,
+      });
+    }
+
+    toast.success("Ви успішно вийшли", {
+      duration: 2000,
+    });
+    return { status: "success" };
   } catch (error) {
     return thunkAPI.rejectWithValue({
       message: error instanceof Error ? error.message : "Unknown error",

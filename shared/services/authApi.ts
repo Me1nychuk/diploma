@@ -10,7 +10,7 @@ export const registerUser = async ({
   ApiResponse<User>
 > => {
   try {
-    const response = await axiosInstance.post("/auth/register", {
+    const response = await axiosInstance.post("auth/register", {
       email,
       password,
       fullname,
@@ -42,7 +42,7 @@ export const loginUser = async ({
   password: string;
 }) => {
   try {
-    const response = await axiosInstance.post("/auth/login", {
+    const response = await axiosInstance.post("auth/login", {
       email,
       password,
     });
@@ -69,7 +69,7 @@ export const loginUser = async ({
 
 export const verify = async (token: string) => {
   try {
-    const response = await axiosInstance.get(`/auth/verify/${token}`);
+    const response = await axiosInstance.get(`auth/verify/${token}`);
 
     return {
       statusCode: response.status,
@@ -86,6 +86,30 @@ export const verify = async (token: string) => {
     return {
       statusCode: 500,
       error: "User verification failed. Something went wrong.",
+    };
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const response = await axiosInstance.post("auth/logout");
+
+    setToken("");
+    return {
+      statusCode: response.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "User logout failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "User logout failed. Something went wrong.",
     };
   }
 };
