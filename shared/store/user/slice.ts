@@ -32,9 +32,7 @@ const slice = createSlice({
     },
     updateToken: (state, action) => {
       state.token = action.payload;
-      const decodedToken = jwtDecode<JWTPayload>(
-        action.payload.accessToken.split(" ")[1]
-      );
+      const decodedToken = jwtDecode<JWTPayload>(action.payload.split(" ")[1]);
       state.currentUser = {
         id: decodedToken.id,
         email: decodedToken.email,

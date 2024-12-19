@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import store, { persistor } from "@/shared/store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { AuthProvider } from "./auth-provider";
 
 interface ProvidersProps {
   children?: React.ReactNode;
@@ -17,12 +18,12 @@ export const Providers = ({ children }: ProvidersProps) => {
     <div className="flex-1 flex relative z-10 min-h-full">
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <NextTopLoader />
-          <Toaster position="top-right" reverseOrder={false} />
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <AuthProvider>{children}</AuthProvider>
+            <NextTopLoader />
+            <Toaster position="top-right" reverseOrder={false} />
           </ThemeProvider>
-          </PersistGate>
+        </PersistGate>
       </Provider>
     </div>
   );

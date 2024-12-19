@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
 });
 
 export const setToken = (token: string) => {
@@ -21,7 +22,7 @@ export const clearToken = () => {
   axiosInstance.defaults.headers.common.Authorization = ``;
 };
 
-const MAX_RETRY_ATTEMPTS = 2; // максимальна кількість спроб оновлення токенів
+const MAX_RETRY_ATTEMPTS = 1; // максимальна кількість спроб оновлення токенів
 let retryCount = 0; // лічильник спроб оновлення
 
 //interceptor for refreshing

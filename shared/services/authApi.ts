@@ -1,6 +1,6 @@
 import { ApiResponse, User } from "@/types";
 import axios from "axios";
-import { axiosInstance, setToken } from "./axiosInstance";
+import { axiosInstance, clearToken, setToken } from "./axiosInstance";
 
 export const registerUser = async ({
   email,
@@ -48,6 +48,7 @@ export const loginUser = async ({
     });
 
     setToken(response.data.accessToken);
+
     return {
       statusCode: response.status,
       data: response.data,
@@ -94,7 +95,7 @@ export const logoutUser = async () => {
   try {
     const response = await axiosInstance.post("auth/logout");
 
-    setToken("");
+    clearToken();
     return {
       statusCode: response.status,
       message: response.data.message,
@@ -110,6 +111,33 @@ export const logoutUser = async () => {
     return {
       statusCode: 500,
       error: "User logout failed. Something went wrong.",
+    };
+  }
+};
+
+export const refreshTokes = async () => {
+  try {
+    const refreshResponse = await axiosInstance.get("auth/refresh-tokens");
+
+    setToken(refreshResponse.data.accessToken);
+    return {
+      accessToken: refreshResponse.data.accessToken,
+      statusCode: refreshResponse.status,
+    };
+  } catch (error) {
+    clearToken();
+
+    window.location.href = "/login";
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "Refreshing is failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "Refreshing failed. Something went wrong.",
     };
   }
 };

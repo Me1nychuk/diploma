@@ -14,6 +14,9 @@ export { NewsItem } from "./news-item";
 export { NewsBlock } from "./news-block";
 export { Pagination } from "./pagination";
 
+// AuthProvider
+export { AuthProvider } from "./auth-provider";
+
 // Main page
 export { HeroSection, Greetings } from "./main-page";
 // About us
