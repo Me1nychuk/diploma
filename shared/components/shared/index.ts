@@ -13,6 +13,7 @@ export { SelectSortType } from "./select-sort-type";
 export { NewsItem } from "./news-item";
 export { NewsBlock } from "./news-block";
 export { Pagination } from "./pagination";
+export { DiscussionTable } from "./discussion-table";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";

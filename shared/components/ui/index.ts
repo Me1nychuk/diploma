@@ -22,3 +22,13 @@ export { Switch } from "./switch";
 export { Tooltip } from "./tooltip";
 export { LogoIcon } from "./logo";
 export { InputWithState } from "./input-with-state";
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from "./table";

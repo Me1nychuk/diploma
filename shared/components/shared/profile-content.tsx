@@ -9,10 +9,78 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
+import { DiscussionTable } from "./discussion-table";
 
 interface ProfileContentProps {
   className?: string;
 }
+
+const discussions = [
+  {
+    id: "1",
+    title:
+      "Тема обговорення 1 loremsdsdsdasd afsd g g sdgf s asf afasfdasfasf asfa fg",
+    content: "Це перше обговорення.",
+
+    opinions: [
+      {
+        id: "o1",
+        content: "Це моя думка про перше обговорення.",
+        authorId: "a1",
+        createdAt: "2023-01-01",
+      },
+      {
+        id: "o2",
+        content: "Інша думка про перше обговорення.",
+        authorId: "a1",
+        createdAt: "2023-01-02",
+      },
+    ],
+    isApproved: true,
+    createdAt: "2023-01-01",
+    updatedAt: "2023-01-03",
+  },
+  {
+    id: "2",
+    title: "Тема обговорення 2",
+    content: "Це друге обговорення.",
+
+    opinions: [
+      {
+        id: "o3",
+        content: "Це моя думка про друге обговорення.",
+        authorId: "a1",
+        createdAt: "2023-02-01",
+      },
+    ],
+    isApproved: false,
+    createdAt: "2023-02-01",
+    updatedAt: "2023-02-03",
+  },
+  {
+    id: "3",
+    title: "Тема обговорення 3",
+    content: "Це третє обговорення.",
+
+    opinions: [
+      {
+        id: "o4",
+        content: "Це моя думка про третє обговорення.",
+        authorId: "a1",
+        createdAt: "2023-03-01",
+      },
+      {
+        id: "o5",
+        content: "Інша думка про третє обговорення.",
+        authorId: "a1",
+        createdAt: "2023-03-02",
+      },
+    ],
+    isApproved: true,
+    createdAt: "2023-03-01",
+    updatedAt: "2023-03-03",
+  },
+];
 
 const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
   const { currentUser, isLoading } = useAppSelector((state) => state.user);
@@ -89,35 +157,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
             </div>
           </div>
 
-          <table className="table-discussion">
-            <caption>Список ваших обговорень</caption>
-            <thead>
-              <tr>
-                <th>Тема</th>
-                <th>Кількість відповідей</th>
-                <th>Дата публікації</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Тема обговорення 1</td>
-                <td>10 відповідей</td>
-                <td>2022-01-01</td>
-              </tr>
-
-              <tr>
-                <td>Тема обговорення 1</td>
-                <td>10 відповідей</td>
-                <td>2022-01-01</td>
-              </tr>
-
-              <tr>
-                <td>Тема обговорення 1</td>
-                <td>10 відповідей</td>
-                <td>2022-01-01</td>
-              </tr>
-            </tbody>
-          </table>
+          <DiscussionTable discussions={discussions} />
 
           <div className="flex justify-between max-sm:flex-col max-sm:gap-5 items-center">
             <Link
