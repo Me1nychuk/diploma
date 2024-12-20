@@ -29,14 +29,14 @@ const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
       <TableBody>
         {discussions.map((el) => (
           <TableRow key={el.id}>
-            <Link
-              className="hover:text-white transition-all duration-100"
-              href={"/discussins/" + el.id}
-            >
-              <TableCell className="text-left line-clamp-2 ">
+            <TableCell className="text-left line-clamp-2 ">
+              <Link
+                className="hover:text-white transition-all duration-100"
+                href={"/discussins/" + el.id}
+              >
                 {el.title}
-              </TableCell>
-            </Link>
+              </Link>
+            </TableCell>
             <TableCell className="p-[1px]  ">
               {el.opinions.length || 0}
             </TableCell>

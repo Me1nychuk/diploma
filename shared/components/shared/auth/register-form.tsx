@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { Button, Label, LogoIcon } from "@/shared/components/ui";
@@ -25,6 +25,9 @@ const Schema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Паролі мають співпадати")
     .required("Обов'язкове поле"),
+  isTermsAccepted: Yup.boolean()
+    .oneOf([true], "Ви повинні погодитися з умовами")
+    .required("Обов'язкове поле"),
 });
 
 interface Credentials {
@@ -32,6 +35,7 @@ interface Credentials {
   password: string;
   confirmPassword: string;
   fullName: string;
+  isTermsAccepted: boolean;
 }
 
 const initialValues: Credentials = {
@@ -39,16 +43,19 @@ const initialValues: Credentials = {
   password: "",
   confirmPassword: "",
   fullName: "",
+  isTermsAccepted: false,
 };
 interface RegisterFormProps {
   className?: string;
 }
 export const RegisterForm = ({}: RegisterFormProps) => {
   const dispatch = useAppDispatch();
- const { isLoading, currentUser } = useAppSelector((state) => state.user);
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const toggleTerms = () => setIsTermsAccepted(!isTermsAccepted);
+  const { isLoading, currentUser } = useAppSelector((state) => state.user);
   const router = useRouter();
   if (currentUser) {
-     router.replace("/");
+    router.replace("/");
   }
   const handleSubmit = (
     values: Credentials,
@@ -120,9 +127,32 @@ export const RegisterForm = ({}: RegisterFormProps) => {
                 className={css.err}
               ></ErrorMessage>
             </Label>
+            <Label className={css.labelCase}>
+              <div className={css.checkboxblock}>
+                <Field
+                  type="checkbox"
+                  name="isTermsAccepted"
+                  onClick={toggleTerms}
+                  className={css.input + " " + css.checkbox}
+                />
+                <span className={css.label}>
+                  Ви погоджуєтесь з{" "}
+                  <Link href="/policy" className=" underline opacity-80">
+                    нашою політикою
+                  </Link>
+                  ?
+                </span>
+              </div>
+              <ErrorMessage
+                name="isTermsAccepted"
+                component="span"
+                className={css.err}
+              ></ErrorMessage>
+            </Label>
 
             <Button
               type="submit"
+              disabled={!isTermsAccepted}
               className="block rounded-xl bg-tertiary mb-2 font-bold text-lg text-background cursor-pointer hover:bg-secondary active:translate-y-[2px]"
             >
               Зареєструватись
