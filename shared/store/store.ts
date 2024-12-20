@@ -13,7 +13,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { currentUserReducer } from "./user/slice";
+import { currentUserReducer, currentUserState } from "./user/slice";
 import { dataReducer } from "./data/slice";
 
 const persistConfig = {
@@ -23,7 +23,7 @@ const persistConfig = {
 
 const store = configureStore({
   reducer: {
-    user: persistReducer(persistConfig, currentUserReducer),
+    user: persistReducer<currentUserState>(persistConfig, currentUserReducer),
     data: dataReducer,
   },
   middleware: (getDefaultMiddleware) =>
