@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+
 import { InfoBlock } from "@/shared/components/shared";
 import { useFadeInAnimation } from "@/shared/hooks";
 import { animated } from "@react-spring/web";

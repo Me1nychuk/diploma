@@ -1,16 +1,19 @@
 import { Container, Greetings, HeroSection } from "@/shared/components/shared";
+import { Loader2 } from "lucide-react";
 
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Home: React.FC = () => {
   return (
     <Container className="max-w-full h-full">
-      <HeroSection />
+      <Suspense fallback={<Loader2 className=" animate-spin mx-auto mt-2" />}>
+        <HeroSection />
 
-      <Greetings />
+        <Greetings />
 
-      <Link href="/users/1">Users</Link>
+        <Link href="/users/1">Users</Link>
+      </Suspense>
     </Container>
   );
 };

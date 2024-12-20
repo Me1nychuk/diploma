@@ -4,8 +4,8 @@ import React, { useRef } from "react";
 
 function useFadeInAnimation({
   threshold = 0.1,
-  initialY = 100,
-  config = { mass: 10, tension: 200, friction: 50 },
+  initialY = 50,
+  config = { mass: 1, tension: 120, friction: 14 },
 } = {}) {
   const ref = useRef(null);
   const [hasAnimated, setHasAnimated] = React.useState(false);
