@@ -35,6 +35,8 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  margin-left: 20px;
+  @apply max-xs:ml-0;
 
   & .label{
     font-size: 12px;
