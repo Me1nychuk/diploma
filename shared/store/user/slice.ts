@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
-import { apiLoginUser, apiLogoutUser, apiRegisterUser } from "./operations";
+import {
+  apiLoginUser,
+  apiLogoutUser,
+  apiRegisterUser,
+  apiUpdateCurrentUser,
+} from "./operations";
 import { JWTPayload } from "@/types";
 
 export interface currentUserState {
@@ -97,6 +102,27 @@ const slice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.errorMessage = "Failed to logout";
+      })
+      .addCase(apiUpdateCurrentUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
+      })
+      .addCase(apiUpdateCurrentUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.currentUser = {
+          id: payload.id,
+          email: payload.email,
+          role: payload.role,
+          fullname: payload.fullname,
+          isVerified: payload.isVerified,
+          isBlocked: payload.isBlocked,
+        };
+      })
+      .addCase(apiUpdateCurrentUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = "Failed to update user";
       }),
 });
 

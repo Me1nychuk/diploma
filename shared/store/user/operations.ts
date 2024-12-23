@@ -1,4 +1,10 @@
-import { loginUser, logoutUser, registerUser } from "@/shared/services";
+import { UserData } from "@/shared/components/shared/user-form";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  updateUser,
+} from "@/shared/services";
 import { User } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
@@ -100,6 +106,33 @@ export const apiLogoutUser = createAsyncThunk<
       duration: 2000,
     });
     return { status: "success" };
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiUpdateCurrentUser = createAsyncThunk<
+  User,
+  { newData: UserData; id: string },
+  { rejectValue: RegisterUserError }
+>("currentUser/updateUser", async (dto, thunkAPI) => {
+  try {
+    const response = await updateUser(dto.id, dto.newData);
+    console.log(response);
+    if (response.statusCode !== 201) {
+      toast.error("Нажаль не вдалося оновити профіль", {
+        duration: 4000,
+      });
+      return thunkAPI.rejectWithValue({
+        message: response.error || "Update failed.",
+        statusCode: response.statusCode,
+      });
+    }
+
+    toast.success("Ви успішно оновили профіль", { duration: 2000 });
+    return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({
       message: error instanceof Error ? error.message : "Unknown error",

@@ -52,12 +52,9 @@ export const LoginForm = ({}: LoginFormProps) => {
         password: values.password,
       })
     );
-  
+
     actions.resetForm();
   };
-
-
-
 
   return (
     <>
@@ -119,4 +116,3 @@ export const LoginForm = ({}: LoginFormProps) => {
     </>
   );
 };
-

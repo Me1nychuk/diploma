@@ -14,6 +14,7 @@ export { NewsItem } from "./news-item";
 export { NewsBlock } from "./news-block";
 export { Pagination } from "./pagination";
 export { DiscussionTable } from "./discussion-table";
+export { UserForm } from "./user-form";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";
