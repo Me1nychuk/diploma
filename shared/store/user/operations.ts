@@ -121,7 +121,7 @@ export const apiUpdateCurrentUser = createAsyncThunk<
   try {
     const response = await updateUser(dto.id, dto.newData);
     console.log(response);
-    if (response.statusCode !== 201) {
+    if (response.statusCode !== 200) {
       toast.error("Нажаль не вдалося оновити профіль", {
         duration: 4000,
       });
