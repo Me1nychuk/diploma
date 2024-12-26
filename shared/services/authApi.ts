@@ -141,3 +141,28 @@ export const refreshTokes = async () => {
     };
   }
 };
+
+export const forgotPassword = async (email: string) => {
+  try {
+    const response = await axiosInstance.post("auth/forgot-password", {
+      email,
+    });
+
+    return {
+      statusCode: response.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "Reset is failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "Reset failed. Something went wrong.",
+    };
+  }
+};
