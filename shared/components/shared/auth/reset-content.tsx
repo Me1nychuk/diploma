@@ -3,8 +3,15 @@ import { forgotPassword } from "@/shared/services";
 import React from "react";
 import { Button, Input } from "../../ui";
 import { Loader2 } from "lucide-react";
+import { useAppSelector } from "@/shared/store/store";
+import { useRouter } from "next/navigation";
 
 const ResetContent: React.FC = () => {
+  const { currentUser } = useAppSelector((state) => state.user);
+  const router = useRouter();
+  if (currentUser) {
+    router.replace("/");
+  }
   const [email, setEmail] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [requestSent, setRequestSent] = React.useState<
@@ -17,6 +24,7 @@ const ResetContent: React.FC = () => {
 
     if (response.statusCode === 201) {
       setRequestSent("success");
+      setEmail("");
     } else {
       setRequestSent("error");
     }
@@ -52,15 +60,15 @@ const ResetContent: React.FC = () => {
       {isLoading && <Loader2 className="animate-spin mx-auto my-5" size={40} />}
 
       {!isLoading && requestSent === "success" && (
-        <p className="font-extrabold text-center text-green-500">
+        <p className="font-extrabold text-center ">
           Посилання для скидання паролю було надіслано на вашу електронну
-          адресу.
+          адресу. ✅
         </p>
       )}
       {!isLoading && requestSent === "error" && (
-        <p className="font-extrabold text-center text-red-500">
+        <p className="font-extrabold text-center ">
           Щось пішло не так, переконайтесь чи ваша електронна адреса правильна
-          або спробуєте ще раз пізніше.
+          або спробуєте ще раз пізніше. ❌
         </p>
       )}
     </>

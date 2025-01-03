@@ -166,3 +166,28 @@ export const forgotPassword = async (email: string) => {
     };
   }
 };
+
+export const resetPassword = async (password: string, token: string) => {
+  try {
+    const response = await axiosInstance.post(`auth/reset-password/${token}`, {
+      password,
+    });
+
+    return {
+      statusCode: response.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "Reset is failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "Reset failed. Something went wrong.",
+    };
+  }
+};
