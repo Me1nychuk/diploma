@@ -1,7 +1,6 @@
 import { Container, Greetings, HeroSection } from "@/shared/components/shared";
 import { Loader2 } from "lucide-react";
 
-import Link from "next/link";
 import React, { Suspense } from "react";
 
 const Home: React.FC = () => {
@@ -11,8 +10,6 @@ const Home: React.FC = () => {
         <HeroSection />
 
         <Greetings />
-
-        <Link href="/users/1">Users</Link>
       </Suspense>
     </Container>
   );

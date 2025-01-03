@@ -6,10 +6,10 @@ import React from "react";
 
 interface UserLabelProps {
   className?: string;
-  user: JWTPayload;
+  user?: JWTPayload;
 }
 
-const UserLabel: React.FC<UserLabelProps> = ({ className, user }) => {
+const UserLabel: React.FC<UserLabelProps> = ({ className }) => {
   return (
     <Link
       href={"/profile"}
@@ -18,7 +18,7 @@ const UserLabel: React.FC<UserLabelProps> = ({ className, user }) => {
         className
       )}
     >
-      <span className="max-xs:hidden"> {user.fullname}</span> <User size={15} />
+      <User size={15} />
     </Link>
   );
 };
