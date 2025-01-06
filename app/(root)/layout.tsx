@@ -1,9 +1,9 @@
-import { Container, Header } from "@/shared/components/shared";
+import { Container, Footer, Header } from "@/shared/components/shared";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "NUWM | Main",
-  description: ", ..",
+  description: "Main page",
 };
 
 export default function HomeLayout({
@@ -15,12 +15,13 @@ export default function HomeLayout({
 }>) {
   return (
     <>
-      <Container className=" relative flex-1 glass max-w-[1400px]  max-h-full rounded-2xl px-4 py-3 ">
+      <Container className=" relative  flex-1 glass max-w-[1400px]  max-h-full rounded-2xl px-4 py-3 ">
         <Header className="absolute w-[calc(100%-32px)] border-b-2 border-text   py-4  " />
-        <main className="pt-[85px]">
+        <main className="pt-[85px] pb-[56px]">
           {modal}
           {children}
         </main>
+        <Footer className="absolute w-[calc(100%-32px)] bottom-2 " />
       </Container>
     </>
   );
