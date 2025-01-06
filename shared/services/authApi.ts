@@ -191,3 +191,30 @@ export const resetPassword = async (password: string, token: string) => {
     };
   }
 };
+
+export const loginWithGoogle = async ({ token }: { token: string }) => {
+  try {
+    const response = await axiosInstance.get(
+      "auth/google/success?token=" + token
+    );
+
+    setToken(response.data.accessToken);
+
+    return {
+      statusCode: response.status,
+      data: response.data,
+    };
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "User login failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "User login failed. Something went wrong.",
+    };
+  }
+};

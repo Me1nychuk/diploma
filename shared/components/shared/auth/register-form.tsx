@@ -157,12 +157,12 @@ export const RegisterForm = ({}: RegisterFormProps) => {
             >
               Зареєструватись
             </Button>
-            <Button
-              type="button"
+            <Link
+              href={process.env.NEXT_PUBLIC_API_URL + "auth/google"}
               className="block p-2 mx-auto rounded-xl bg-red-500 mb-2 font-bold text-sm text-text cursor-pointer hover:bg-red-600 active:translate-y-[2px]"
             >
-              Увійти через Google
-            </Button>
+              Реєстрація через Google
+            </Link>
             <Link href="/login" className={css.hint}>
               Вже зареєстровані?
             </Link>

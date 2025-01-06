@@ -1,6 +1,7 @@
 import { UserData } from "@/shared/components/shared/user-form";
 import {
   loginUser,
+  loginWithGoogle,
   logoutUser,
   registerUser,
   updateUser,
@@ -132,6 +133,37 @@ export const apiUpdateCurrentUser = createAsyncThunk<
     }
 
     toast.success("Ви успішно оновили профіль", { duration: 2000 });
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+export const apiLoginWithGoogle = createAsyncThunk<
+  { accessToken: string },
+  { token: string },
+  { rejectValue: RegisterUserError }
+>("currentUser/loginWithGoogle", async (dto, thunkAPI) => {
+  try {
+    const response = await loginWithGoogle(dto);
+    if (response.statusCode !== 201) {
+      toast.error(
+        "Нажаль не вдалося залогінитися!  \n Причина: " + response.error,
+        {
+          duration: 4000,
+        }
+      );
+      return thunkAPI.rejectWithValue({
+        message: response.error || "Login failed.",
+        statusCode: response.statusCode,
+      });
+    }
+
+    toast.success("Ви успішно залогінились!", {
+      duration: 2000,
+    });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({
