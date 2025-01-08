@@ -32,8 +32,8 @@ export interface JWTPayload {
   email: string;
   role: Role;
   fullname: string;
-  isVerified: true;
-  isBlocked: true;
+  isVerified: boolean;
+  isBlocked: boolean;
 }
 
 export interface User {

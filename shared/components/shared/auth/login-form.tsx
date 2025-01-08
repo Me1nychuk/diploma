@@ -52,12 +52,9 @@ export const LoginForm = ({}: LoginFormProps) => {
         password: values.password,
       })
     );
-  
+
     actions.resetForm();
   };
-
-
-
 
   return (
     <>
@@ -98,18 +95,21 @@ export const LoginForm = ({}: LoginFormProps) => {
             >
               Увійти
             </Button>
-            <Button
-              type="button"
+            <Link
+              href={process.env.NEXT_PUBLIC_API_URL + "auth/google"}
               className="block p-2 mx-auto rounded-xl bg-red-500 mb-2 font-bold text-sm text-text cursor-pointer hover:bg-red-600 active:translate-y-[2px]"
             >
               Увійти через Google
-            </Button>
+            </Link>
 
             {currentUser && currentUser?.fullname && (
               <p className="text-lg font-bold text-secondary text-center">
                 Вітаємо, {currentUser.fullname}!
               </p>
             )}
+            <Link href="/reset" className={css.hint + " mb-2"}>
+              Забули пароль?
+            </Link>
             <Link href="/register" className={css.hint}>
               Ще не маєте облікового запису?
             </Link>
@@ -119,4 +119,3 @@ export const LoginForm = ({}: LoginFormProps) => {
     </>
   );
 };
-

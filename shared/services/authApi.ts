@@ -141,3 +141,80 @@ export const refreshTokes = async () => {
     };
   }
 };
+
+export const forgotPassword = async (email: string) => {
+  try {
+    const response = await axiosInstance.post("auth/forgot-password", {
+      email,
+    });
+
+    return {
+      statusCode: response.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "Reset is failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "Reset failed. Something went wrong.",
+    };
+  }
+};
+
+export const resetPassword = async (password: string, token: string) => {
+  try {
+    const response = await axiosInstance.post(`auth/reset-password/${token}`, {
+      password,
+    });
+
+    return {
+      statusCode: response.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "Reset is failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "Reset failed. Something went wrong.",
+    };
+  }
+};
+
+export const loginWithGoogle = async ({ token }: { token: string }) => {
+  try {
+    const response = await axiosInstance.get(
+      "auth/google/success?token=" + token
+    );
+
+    setToken(response.data.accessToken);
+
+    return {
+      statusCode: response.status,
+      data: response.data,
+    };
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return {
+        statusCode: error.response?.status || 500,
+        error: error.response?.data?.message || "User login failed.",
+      };
+    }
+
+    return {
+      statusCode: 500,
+      error: "User login failed. Something went wrong.",
+    };
+  }
+};

@@ -3,26 +3,31 @@ import { axiosInstance } from "./axiosInstance";
 import { Role } from "@/types";
 
 export const createUser = async () => {};
-export const updateUser = async (id: string, updateUserDto: {
-   fullname?: string,
-  email?: string,  
-  password?: string,
-  phone?: string,
-  bio?: string,
-  role?: Role,
-  resetToken?: string,
-  resetTokenExp?: Date,
-  isVerified?: boolean,
-  isBlocked?: boolean,
-}) => {
+export const updateUser = async (
+  id: string,
+  updateUserDto: {
+    fullname?: string;
+    email?: string;
+    password?: string;
+    phone?: string;
+    bio?: string;
+    role?: Role;
+    resetToken?: string;
+    resetTokenExp?: Date;
+    isVerified?: boolean;
+    isBlocked?: boolean;
+  }
+) => {
   try {
-    const response = await axiosInstance.patch("/users/" + id, { ...updateUserDto });
+    const response = await axiosInstance.patch("/users/" + id, {
+      ...updateUserDto,
+    });
     return {
       statusCode: response.status,
       data: response.data,
     };
   } catch (error) {
-     if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
       return {
         statusCode: error.response?.status || 500,
         error: error.response?.data?.message || "Oops, something went wrong.",
@@ -36,14 +41,14 @@ export const updateUser = async (id: string, updateUserDto: {
   }
 };
 export const deleteUser = async (idOrEmail: string) => {
-    try {
+  try {
     const response = await axiosInstance.delete("/users/" + idOrEmail);
     return {
       statusCode: response.status,
       data: response.data,
     };
   } catch (error) {
-     if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
       return {
         statusCode: error.response?.status || 500,
         error: error.response?.data?.message || "Oops, something went wrong.",
@@ -57,7 +62,7 @@ export const deleteUser = async (idOrEmail: string) => {
   }
 };
 export const getMe = async () => {
-     try {
+  try {
     const response = await axiosInstance.get("/users/me");
 
     return {
@@ -86,13 +91,15 @@ export const fetchUsers = async ({
   perPage: number;
 }) => {
   try {
-    const response = await axiosInstance.get("/users?page=" + page + "&perPage=" + perPage);
+    const response = await axiosInstance.get(
+      "/users?page=" + page + "&perPage=" + perPage
+    );
     return {
       statusCode: response.status,
       data: response.data,
     };
   } catch (error) {
-     if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
       return {
         statusCode: error.response?.status || 500,
         error: error.response?.data?.message || "Oops, something went wrong.",
@@ -105,7 +112,7 @@ export const fetchUsers = async ({
     };
   }
 };
-export const fetchUserByIdOrEmail = async (idOrEmail: string ) => {
+export const fetchUserByIdOrEmail = async (idOrEmail: string) => {
   try {
     const response = await axiosInstance.get("/users/" + idOrEmail);
     return {
@@ -113,7 +120,7 @@ export const fetchUserByIdOrEmail = async (idOrEmail: string ) => {
       data: response.data,
     };
   } catch (error) {
-     if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
       return {
         statusCode: error.response?.status || 500,
         error: error.response?.data?.message || "Oops, something went wrong.",
