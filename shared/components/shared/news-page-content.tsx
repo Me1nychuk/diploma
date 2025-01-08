@@ -4,20 +4,21 @@ import { Input } from "@/shared/components/ui";
 
 import {
   NewsBlock,
-  Pagination,
+  // Pagination,
   SelectSortType,
 } from "@/shared/components/shared";
 import { Search } from "lucide-react";
-import { usePagination } from "@/shared/hooks/usePagination";
 
-const array = Array.from({ length: 30 }, (_, index) => ({ id: index + 1 }));
+// const array = Array.from({ length: 30 }, (_, index) => ({ id: index + 1 }));
 
 export const NewsPageContent: React.FC = () => {
-  const { pagination, nextPage, previousPage, changeTotalPages } =
-    usePagination();
-  React.useEffect(() => {
-    changeTotalPages(Math.ceil(array.length / pagination.per_page));
-  }, [pagination.per_page]);
+  // const pagination = {
+  //   page: 1,
+  //   per_page: 5,
+  //   hasNextPage: true,
+  //   hasPrevPage: false,
+  //   totalPages: 1,
+  // };
 
   return (
     <>
@@ -26,8 +27,8 @@ export const NewsPageContent: React.FC = () => {
           Новини кафедри
         </h1>
 
-        <div className="border-red-500 border-2">
-          <div className="flex max-sm:flex-col gap-5 justify-between mb-5 border-green-800 border-2">
+        <div>
+          <div className="flex max-sm:flex-col gap-5 justify-between mb-5">
             <div className="flex items-center gap-2 bg-tertiary text-background px-3 py-1 rounded-xl">
               <Search />
               <Input
@@ -35,20 +36,23 @@ export const NewsPageContent: React.FC = () => {
                 className="max-w-full p-0 border-none"
               />
             </div>
+            {/*    TODO: SelectSortType */}
             <SelectSortType />
           </div>
-          <div className="border-blue-500 border-2">
-            <NewsBlock />
-          </div>
+
+          <NewsBlock />
+
+          {/* 
+          TODO: redo pagination + searchParams
           <Pagination
             hasNextPage={pagination.hasNextPage}
             hasPrevPage={pagination.hasPrevPage}
             totalPages={pagination.totalPages}
             page={pagination.page}
-            nextPage={nextPage}
-            previousPage={previousPage}
-          />
-          <div className="flex justify-center gap-2">
+            nextPage={() => {}}
+            previousPage={() => {}}
+          /> */}
+          {/* <div className="flex justify-center gap-2">
             {array
               .slice(
                 pagination.page === 1
@@ -61,7 +65,7 @@ export const NewsPageContent: React.FC = () => {
               .map((id) => (
                 <p key={id.id}>{id.id}</p>
               ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </>

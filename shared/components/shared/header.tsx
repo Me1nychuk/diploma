@@ -15,13 +15,15 @@ import UserLabel from "./user-label";
 
 interface HeaderProps {
   className?: string;
-  admin?: boolean;
+
   clear?: boolean;
 }
-export const Header = ({ className, admin, clear }: HeaderProps) => {
-  const { currentUser} = useAppSelector((state) => state.user)
+export const Header = ({ className, clear }: HeaderProps) => {
+  const { currentUser } = useAppSelector((state) => state.user);
   const { width } = useWindowSize();
   const logoSize = width < 375 ? 40 : width < 768 ? 30 : 40;
+  const admin = currentUser?.role === "ADMIN";
+
   return (
     <>
       <header
@@ -55,9 +57,9 @@ export const Header = ({ className, admin, clear }: HeaderProps) => {
         <div className="flex items-center gap-3">
           {!clear &&
             (currentUser ? (
-            <UserLabel user={currentUser}/>
+              <UserLabel user={currentUser} />
             ) : (
-              <AuthLinks orientation={ width < 768} />
+              <AuthLinks orientation={width < 768} />
             ))}
           <ThemeSwitch />
           {width < 768 && <MobileNavbar admin={admin} />}

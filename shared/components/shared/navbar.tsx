@@ -12,19 +12,11 @@ interface NavbarProps {
   className?: string;
   admin?: boolean;
 }
-export const Navbar = ({ className, admin = false }: NavbarProps) => {
+export const Navbar = ({ admin = false }: NavbarProps) => {
   return (
     <>
       <NavigationMenu>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link
-              href="/"
-              className="block text-[14px] px-2 py-1 hover:bg-background-transparent rounded-xl"
-            >
-              Головна
-            </Link>
-          </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Кафедра</NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -32,16 +24,52 @@ export const Navbar = ({ className, admin = false }: NavbarProps) => {
                 <li>
                   <Link href="/about">Про нас</Link>
                 </li>
+
+                <li>
+                  <Link href="/">Склад кафедри</Link>
+                </li>
+                <li>
+                  <Link href="">Графік консультацій</Link>
+                </li>
+                <li>
+                  <Link href="">Лабораторії</Link>
+                </li>
+                <li>
+                  <Link href="">Наукова діяльність</Link>
+                </li>
+                <li>
+                  <Link href="">Контакти </Link>
+                </li>
                 <li>
                   <Link href="/news">Новини кафедри</Link>
                 </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Навчальний процес</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="nav-list">
                 <li>
-                  <Link href="https://nuwm.edu.ua/" target="blank">
-                    Сайт університету
-                  </Link>
+                  <Link href="/">Освітні програми</Link>
                 </li>
                 <li>
-                  <Link href="">Щось ще</Link>
+                  <Link href="/">Кваліфікаційні роботи</Link>
+                </li>
+                <li>
+                  <Link href="">Дисципліни вільного вибору</Link>
+                </li>
+                <li>
+                  <Link href="">Практики</Link>
+                </li>
+                <li>
+                  <Link href="">Анкетування</Link>
+                </li>
+                <li>
+                  <Link href="">Загальна інформація</Link>
+                </li>
+                <li>
+                  <Link href="">Наші досягнення</Link>
                 </li>
               </ul>
             </NavigationMenuContent>
@@ -54,30 +82,21 @@ export const Navbar = ({ className, admin = false }: NavbarProps) => {
                   <Link href="/chat">Живий чат</Link>
                 </li>
                 <li>
-                  <Link href="/policy">Політика</Link>
+                  <Link href="/">Неформальна освіта</Link>
                 </li>
                 <li>
-                  <Link href="">Пункт такий то</Link>
+                  <Link href="">Скринька довіри</Link>
+                </li>
+                <li>
+                  <Link href="">Співпраця з роботодавцями</Link>
+                </li>
+                <li>
+                  <Link href="">Корисні посилання</Link>
                 </li>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Розділ</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="nav-list">
-                <li>
-                  <Link href="">Пункт такий то</Link>
-                </li>
-                <li>
-                  <Link href="">Пункт такий то</Link>
-                </li>
-                <li>
-                  <Link href="">Пункт такий то</Link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+
           {admin && (
             <NavigationMenuItem>
               <Link
