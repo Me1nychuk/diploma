@@ -20,10 +20,7 @@ interface MobileNavbarProps {
   className?: string;
   admin?: boolean;
 }
-export const MobileNavbar = ({
-  className,
-  admin = false,
-}: MobileNavbarProps) => {
+export const MobileNavbar = ({ admin = false }: MobileNavbarProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleClose = () => setIsOpen(false);
@@ -62,19 +59,81 @@ export const MobileNavbar = ({
                       </Link>
                     </li>
                     <li>
-                      <Link href="/policy" onClick={handleClose}>
-                        Політика
+                      <Link href="/" onClick={handleClose}>
+                        Склад кафедри
                       </Link>
                     </li>
                     <li>
                       <Link href="" onClick={handleClose}>
-                        Пункт такий то
+                        Графік консультацій
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Лабораторії
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Наукова діяльність
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Контакти
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/news" onClick={handleClose}>
+                        Новини кафедри
                       </Link>
                     </li>
                   </ul>
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
+                <AccordionTrigger>Навчальний процес</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="nav-list">
+                    <li>
+                      <Link href="/" onClick={handleClose}>
+                        Освітні програми
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/" onClick={handleClose}>
+                        Кваліфікаційні роботи
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Дисципліни вільного вибору
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Практики
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Анкетування
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Загальна інформація
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="" onClick={handleClose}>
+                        Наші досягнення
+                      </Link>
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-4">
                 <AccordionTrigger>Студентам</AccordionTrigger>
                 <AccordionContent>
                   <ul className="nav-list">
@@ -84,42 +143,30 @@ export const MobileNavbar = ({
                       </Link>
                     </li>
                     <li>
-                      <Link href="/policy" onClick={handleClose}>
-                        Політика
+                      <Link href="/" onClick={handleClose}>
+                        Неформальна освіта
                       </Link>
                     </li>
                     <li>
                       <Link href="" onClick={handleClose}>
-                        Пункт такий то
-                      </Link>
-                    </li>
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>Розділ</AccordionTrigger>
-                <AccordionContent>
-                  <ul className="nav-list">
-                    <li>
-                      <Link href="" onClick={handleClose}>
-                        Пункт такий то
+                        Скринька довіри
                       </Link>
                     </li>
                     <li>
                       <Link href="" onClick={handleClose}>
-                        Пункт такий то
+                        Співпраця з роботодавцями
                       </Link>
                     </li>
                     <li>
                       <Link href="" onClick={handleClose}>
-                        Пункт такий то
+                        Корисні посилання
                       </Link>
                     </li>
                   </ul>
                 </AccordionContent>
               </AccordionItem>
               {admin && (
-                <AccordionItem value="item-1">
+                <AccordionItem value="item-5">
                   <Link
                     href="/admin"
                     className="w-full block text-base py-4"
