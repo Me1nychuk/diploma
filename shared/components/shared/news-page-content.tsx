@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Input } from "@/shared/components/ui";
+import { Button, Input } from "@/shared/components/ui";
 
 import {
   NewsBlock,
@@ -8,25 +8,53 @@ import {
   SelectSortType,
 } from "@/shared/components/shared";
 import { Search } from "lucide-react";
-
-// const array = Array.from({ length: 30 }, (_, index) => ({ id: index + 1 }));
+import { useAppDispatch, useAppSelector } from "@/shared/store/store";
+import { apiGetNews } from "@/shared/store/data/operations";
+import { useSearchParamsCust } from "@/shared/hooks";
 
 export const NewsPageContent: React.FC = () => {
-  // const pagination = {
-  //   page: 1,
-  //   per_page: 5,
-  //   hasNextPage: true,
-  //   hasPrevPage: false,
-  //   totalPages: 1,
-  // };
-
+  const news = useAppSelector((state) => state.data.data.news);
+  const dispatch = useAppDispatch();
+  const params = useSearchParamsCust();
+  console.log(params);
+  React.useEffect(() => {
+    dispatch(
+      apiGetNews({
+        per_page: params.getParams.per_page || "10",
+        page: params.getParams.page || "1",
+        search: params.getParams.search || "",
+        sortBy: (params.getParams.sortBy as "title" | "date") || "title",
+        order: (params.getParams.order as "asc" | "desc") || "asc",
+      })
+    );
+  }, [dispatch, params.getParams]);
+  // useDebounce
   return (
     <>
       <div className="">
         <h1 className="font-bold text-4xl max-sm:text-3xl text-center mb-5 ">
           Новини кафедри
         </h1>
-
+        <Button
+          onClick={() =>
+            params.setParams({
+              ...params.getParams,
+              page: "2",
+            })
+          }
+        >
+          Оновити параметри
+        </Button>
+        <Button
+          onClick={() =>
+            params.setParams({
+              ...params.getParams,
+              per_page: "1",
+            })
+          }
+        >
+          Оновити параметри
+        </Button>
         <div>
           <div className="flex max-sm:flex-col gap-5 justify-between mb-5">
             <div className="flex items-center gap-2 bg-tertiary text-background px-3 py-1 rounded-xl">
@@ -39,8 +67,8 @@ export const NewsPageContent: React.FC = () => {
             {/*    TODO: SelectSortType */}
             <SelectSortType />
           </div>
-
-          <NewsBlock />
+          {news && news.data?.map((news) => <p key={news.id}>{news.title}</p>)}
+          {/* <NewsBlock /> */}
 
           {/* 
           TODO: redo pagination + searchParams
