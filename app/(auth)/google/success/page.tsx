@@ -1,10 +1,11 @@
+"use client";
 import { GoogleContent } from "@/shared/components/shared/auth";
 import { Loader2 } from "lucide-react";
 import React, { Suspense } from "react";
+import { useSearchParam } from "react-use";
 
 const Page: React.FC = () => {
-  const searchParams = new URLSearchParams(window.location.search);
-  const token = searchParams.get("token");
+  const token = useSearchParam("token");
 
   return (
     <div className="w-full max-w-[700px] p-5 rounded-xl glass h-full mx-auto">
