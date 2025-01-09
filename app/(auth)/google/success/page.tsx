@@ -6,10 +6,12 @@ import { useSearchParam } from "react-use";
 
 const Page: React.FC = () => {
   const token = useSearchParam("token");
+  console.log("token: ", token);
 
   return (
     <div className="w-full max-w-[700px] p-5 rounded-xl glass h-full mx-auto">
       <Suspense fallback={<Loader2 className="animate-spin mx-auto mt-2" />}>
+        {token}
         {token && <GoogleContent token={token} />}
       </Suspense>
     </div>
