@@ -17,6 +17,7 @@ export { DiscussionTable } from "./discussion-table";
 export { UserForm } from "./user-form";
 export { Footer } from "./footer";
 export { SearchInput } from "./search-input";
+export { DiscussionsPageContent } from "./discussions-page-content";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";

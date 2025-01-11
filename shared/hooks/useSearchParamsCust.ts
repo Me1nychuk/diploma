@@ -11,6 +11,7 @@ export const useSearchParamsCust = () => {
     search: searchParams.get("search") || undefined,
     sortBy: searchParams.get("sortBy") || undefined,
     order: searchParams.get("order") || undefined,
+    authorId: searchParams.get("authorId") || undefined,
   });
 
   const updateParameters = () => {
@@ -21,6 +22,7 @@ export const useSearchParamsCust = () => {
     if (params.search) queryParams.set("search", params.search);
     if (params.sortBy) queryParams.set("sortBy", params.sortBy);
     if (params.order) queryParams.set("order", params.order);
+    if (params.authorId) queryParams.set("authorId", params.authorId);
 
     route.push(`?${queryParams.toString()}`);
   };
@@ -51,6 +53,13 @@ export const useSearchParamsCust = () => {
     }));
   };
 
+  const updateAuthorId = (newAuthorId: string) => {
+    setParams((prev) => ({
+      ...prev,
+      authorId: newAuthorId,
+    }));
+  };
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -65,6 +74,7 @@ export const useSearchParamsCust = () => {
         search: searchParams.get("search") || undefined,
         sortBy: searchParams.get("sortBy") || undefined,
         order: searchParams.get("order") || undefined,
+        authorId: searchParams.get("authorId") || undefined,
       });
     }
   }, [searchParams]);
@@ -82,5 +92,6 @@ export const useSearchParamsCust = () => {
     updateOrder,
     updateSearch,
     updatePage,
+    updateAuthorId,
   };
 };

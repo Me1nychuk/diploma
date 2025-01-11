@@ -6,16 +6,21 @@ import {
   SearchInput,
   SelectSortType,
 } from "@/shared/components/shared";
-import { useAppDispatch, useAppSelector } from "@/shared/store/store";
-import { apiGetNews } from "@/shared/store/data/operations";
-import { useSearchParamsCust } from "@/shared/hooks";
 import { Loader2 } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/shared/store/store";
+import { useSearchParamsCust } from "@/shared/hooks";
+import { apiGetDiscussions } from "@/shared/store/data/operations";
 
-export const NewsPageContent: React.FC = () => {
+interface DiscussionsPageContentProps {
+  className?: string;
+}
+
+const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
   const {
     isLoading,
-    data: { news },
+    data: { discussions },
   } = useAppSelector((state) => state.data);
+  console.log(discussions);
   const dispatch = useAppDispatch();
   const params = useSearchParamsCust();
   const sortValues = {
@@ -29,12 +34,13 @@ export const NewsPageContent: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(
-      apiGetNews({
+      apiGetDiscussions({
         per_page: params.getParams.per_page || "10",
         page: params.getParams.page || "1",
         search: params.getParams.search || "",
         sortBy: (params.getParams.sortBy as "title" | "date") || "title",
         order: (params.getParams.order as "asc" | "desc") || "asc",
+        authorId: params.getParams.authorId || "",
       })
     );
   }, [dispatch, params.getParams]);
@@ -43,7 +49,7 @@ export const NewsPageContent: React.FC = () => {
     <>
       <div className="">
         <h1 className="font-bold text-4xl max-sm:text-3xl text-center mb-5 ">
-          Новини кафедри
+          Обговорення
         </h1>
 
         <div>
@@ -71,27 +77,31 @@ export const NewsPageContent: React.FC = () => {
               />
             </div>
           </div>
-          {!isLoading && <NewsBlock news={news?.data} />}
+          {!isLoading && <NewsBlock news={discussions?.data} />}
           {isLoading && (
             <Loader2 className="animate-spin mx-auto my-5" size={40} />
           )}
-          {news?.page && news?.totalPages && news?.totalPages && (
-            <Pagination
-              classname="absolute bottom-[100px] left-1/2 -translate-x-1/2"
-              hasNextPage={news.page < news.totalPages}
-              hasPrevPage={news.page > 1}
-              totalPages={news.totalPages}
-              page={news.page}
-              nextPage={() => {
-                params.updatePage(Number(news.page) + 1);
-              }}
-              previousPage={() => {
-                params.updatePage(Number(news.page) - 1);
-              }}
-            />
-          )}
+          {discussions?.page &&
+            discussions?.totalPages &&
+            discussions?.totalPages && (
+              <Pagination
+                classname="absolute bottom-[100px] left-1/2 -translate-x-1/2"
+                hasNextPage={discussions.page < discussions.totalPages}
+                hasPrevPage={discussions.page > 1}
+                totalPages={discussions.totalPages}
+                page={discussions.page}
+                nextPage={() => {
+                  params.updatePage(Number(discussions.page) + 1);
+                }}
+                previousPage={() => {
+                  params.updatePage(Number(discussions.page) - 1);
+                }}
+              />
+            )}
         </div>
       </div>
     </>
   );
 };
+
+export { DiscussionsPageContent };

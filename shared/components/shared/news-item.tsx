@@ -1,4 +1,5 @@
 import { cn } from "@/shared/lib/utils";
+import { User } from "@/types";
 import Link from "next/link";
 import React from "react";
 
@@ -8,6 +9,7 @@ interface NewsItemProps {
   date: string;
   id: string;
   description?: string;
+  author?: User | undefined;
 }
 export const NewsItem = ({
   className,
@@ -15,6 +17,7 @@ export const NewsItem = ({
   date,
   id,
   description,
+  author,
 }: NewsItemProps) => {
   return (
     <>
@@ -36,14 +39,15 @@ export const NewsItem = ({
               : description}
           </p>
         )}
-        <p className="absolute top-2 right-2 text-[12px]">
+        {author && <p className="text-[12px]">Автор: {author.fullname}</p>}
+        <div className="absolute top-2 right-2 text-[12px]">
           {new Date(date).toLocaleDateString()}
-        </p>
+        </div>
         <Link
-          href={`/news/${id}`}
+          href={author ? `/discussions/${id}` : `/news/${id}`}
           className="block w-full    text-tertiary hover:underline  transition-all duration-200  text-center"
         >
-          Переглянути новину
+          Переглянути {author ? "обговорення" : "новину"}
         </Link>
       </div>
     </>
