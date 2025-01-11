@@ -5,14 +5,14 @@ import React from "react";
 interface NewsItemProps {
   className?: string;
   title: string;
-
+  date: string;
   id: string;
   description?: string;
 }
 export const NewsItem = ({
   className,
   title,
-
+  date,
   id,
   description,
 }: NewsItemProps) => {
@@ -36,6 +36,9 @@ export const NewsItem = ({
               : description}
           </p>
         )}
+        <p className="absolute top-2 right-2 text-[12px]">
+          {new Date(date).toLocaleDateString()}
+        </p>
         <Link
           href={`/news/${id}`}
           className="block w-full    text-tertiary hover:underline  transition-all duration-200  text-center"

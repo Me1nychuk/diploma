@@ -6,11 +6,11 @@ export const useSearchParamsCust = () => {
   const route = useRouter();
 
   const [params, setParams] = useState({
-    per_page: searchParams.get("per_page"),
-    page: searchParams.get("page"),
-    search: searchParams.get("search"),
-    sortBy: searchParams.get("sortBy"),
-    order: searchParams.get("order"),
+    per_page: searchParams.get("per_page") || undefined,
+    page: searchParams.get("page") || undefined,
+    search: searchParams.get("search") || undefined,
+    sortBy: searchParams.get("sortBy") || undefined,
+    order: searchParams.get("order") || undefined,
   });
 
   const updateParameters = () => {
@@ -24,6 +24,32 @@ export const useSearchParamsCust = () => {
 
     route.push(`?${queryParams.toString()}`);
   };
+  const updateSortType = (type: string) => {
+    setParams((prev) => ({
+      ...prev,
+      sortBy: type,
+    }));
+  };
+  const updateOrder = (newOrder: string) => {
+    setParams((prev) => ({
+      ...prev,
+      order: newOrder,
+    }));
+  };
+
+  const updateSearch = (newSearch: string) => {
+    setParams((prev) => ({
+      ...prev,
+      search: newSearch,
+    }));
+  };
+
+  const updatePage = (newPage: number) => {
+    setParams((prev) => ({
+      ...prev,
+      page: String(newPage),
+    }));
+  };
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -34,11 +60,11 @@ export const useSearchParamsCust = () => {
   useEffect(() => {
     if (isMounted) {
       setParams({
-        per_page: searchParams.get("per_page"),
-        page: searchParams.get("page"),
-        search: searchParams.get("search"),
-        sortBy: searchParams.get("sortBy"),
-        order: searchParams.get("order"),
+        per_page: searchParams.get("per_page") || undefined,
+        page: searchParams.get("page") || undefined,
+        search: searchParams.get("search") || undefined,
+        sortBy: searchParams.get("sortBy") || undefined,
+        order: searchParams.get("order") || undefined,
       });
     }
   }, [searchParams]);
@@ -52,5 +78,9 @@ export const useSearchParamsCust = () => {
   return {
     getParams: params,
     setParams,
+    updateSortType,
+    updateOrder,
+    updateSearch,
+    updatePage,
   };
 };

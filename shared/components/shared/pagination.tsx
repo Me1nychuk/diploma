@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "../ui";
+import { cn } from "@/shared/lib/utils";
 
 interface PaginationProps {
   hasNextPage?: boolean;
@@ -9,6 +10,7 @@ interface PaginationProps {
   page: number;
   nextPage: () => void;
   previousPage: () => void;
+  classname?: string;
 }
 export const Pagination = ({
   hasNextPage,
@@ -17,9 +19,10 @@ export const Pagination = ({
   page,
   nextPage,
   previousPage,
+  classname,
 }: PaginationProps) => {
   return (
-    <div className="flex items-center justify-center gap-5">
+    <div className={cn("flex items-center justify-center gap-5", classname)}>
       <Button
         disabled={!hasPrevPage}
         className="bg-transparent hover:text-accent transition-all duration-200 active:translate-y-1"

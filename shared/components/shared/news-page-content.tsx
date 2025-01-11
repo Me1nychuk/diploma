@@ -1,26 +1,36 @@
 "use client";
 import React from "react";
-import { Button, Input } from "@/shared/components/ui";
-
 import {
   NewsBlock,
-  // Pagination,
+  Pagination,
+  SearchInput,
   SelectSortType,
 } from "@/shared/components/shared";
-import { Search } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { apiGetNews } from "@/shared/store/data/operations";
 import { useSearchParamsCust } from "@/shared/hooks";
+import { Loader2 } from "lucide-react";
 
 export const NewsPageContent: React.FC = () => {
-  const news = useAppSelector((state) => state.data.data.news);
+  const {
+    isLoading,
+    data: { news },
+  } = useAppSelector((state) => state.data);
   const dispatch = useAppDispatch();
   const params = useSearchParamsCust();
-  console.log(params);
+  const sortValues = {
+    title: "За назвою",
+    date: "За датою",
+  };
+  const orderValues = {
+    asc: "По зростанню",
+    desc: "По спаданню",
+  };
+
   React.useEffect(() => {
     dispatch(
       apiGetNews({
-        per_page: params.getParams.per_page || "10",
+        per_page: params.getParams.per_page || "1",
         page: params.getParams.page || "1",
         search: params.getParams.search || "",
         sortBy: (params.getParams.sortBy as "title" | "date") || "title",
@@ -28,72 +38,58 @@ export const NewsPageContent: React.FC = () => {
       })
     );
   }, [dispatch, params.getParams]);
-  // useDebounce
+
   return (
     <>
       <div className="">
         <h1 className="font-bold text-4xl max-sm:text-3xl text-center mb-5 ">
           Новини кафедри
         </h1>
-        <Button
-          onClick={() =>
-            params.setParams({
-              ...params.getParams,
-              page: "2",
-            })
-          }
-        >
-          Оновити параметри
-        </Button>
-        <Button
-          onClick={() =>
-            params.setParams({
-              ...params.getParams,
-              per_page: "1",
-            })
-          }
-        >
-          Оновити параметри
-        </Button>
+
         <div>
           <div className="flex max-sm:flex-col gap-5 justify-between mb-5">
-            <div className="flex items-center gap-2 bg-tertiary text-background px-3 py-1 rounded-xl">
-              <Search />
-              <Input
-                placeholder="Пошук"
-                className="max-w-full p-0 border-none"
+            <SearchInput
+              value={params.getParams.search || ""}
+              onChange={params.updateSearch}
+            />
+            <div className="flex gap-5 max-sm:justify-between">
+              <SelectSortType
+                values={sortValues}
+                selected={
+                  params.getParams.sortBy ? params.getParams.sortBy : "date"
+                }
+                onChange={params.updateSortType}
+                label="за чим сортувати"
+              />
+              <SelectSortType
+                values={orderValues}
+                selected={
+                  params.getParams.order ? params.getParams.order : "asc"
+                }
+                onChange={params.updateOrder}
+                label="як сортувати"
               />
             </div>
-            {/*    TODO: SelectSortType */}
-            <SelectSortType />
           </div>
-          {news && news.data?.map((news) => <p key={news.id}>{news.title}</p>)}
-          {/* <NewsBlock /> */}
-
-          {/* 
-          TODO: redo pagination + searchParams
-          <Pagination
-            hasNextPage={pagination.hasNextPage}
-            hasPrevPage={pagination.hasPrevPage}
-            totalPages={pagination.totalPages}
-            page={pagination.page}
-            nextPage={() => {}}
-            previousPage={() => {}}
-          /> */}
-          {/* <div className="flex justify-center gap-2">
-            {array
-              .slice(
-                pagination.page === 1
-                  ? 0
-                  : (pagination.page - 1) * pagination.per_page,
-                pagination.page === 1
-                  ? pagination.per_page
-                  : pagination.page * pagination.per_page
-              )
-              .map((id) => (
-                <p key={id.id}>{id.id}</p>
-              ))}
-          </div> */}
+          {!isLoading && <NewsBlock news={news?.data} />}
+          {isLoading && (
+            <Loader2 className="animate-spin mx-auto my-5" size={40} />
+          )}
+          {news?.page && news?.totalPages && news?.totalPages && (
+            <Pagination
+              classname="absolute bottom-[100px] left-1/2 -translate-x-1/2"
+              hasNextPage={news.page < news.totalPages}
+              hasPrevPage={news.page > 1}
+              totalPages={news.totalPages}
+              page={news.page}
+              nextPage={() => {
+                params.updatePage(Number(news.page) + 1);
+              }}
+              previousPage={() => {
+                params.updatePage(Number(news.page) - 1);
+              }}
+            />
+          )}
         </div>
       </div>
     </>

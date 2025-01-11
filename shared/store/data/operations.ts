@@ -18,7 +18,7 @@ import {
   User,
 } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 export interface GetUsersPayload {
   page: number;
@@ -38,9 +38,6 @@ export const apiGetUsers = createAsyncThunk<
   try {
     const res = await fetchUsers(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати користувачів", {
-        duration: 2000,
-      });
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch users failed.",
         statusCode: res.statusCode,
@@ -62,14 +59,12 @@ export const apiGetNews = createAsyncThunk<
   try {
     const res = await fetchNews(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати список новин", {
-        duration: 2000,
-      });
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch news failed.",
         statusCode: res.statusCode,
       });
     }
+
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue({
@@ -86,9 +81,6 @@ export const apiGetComments = createAsyncThunk<
   try {
     const res = await fetchComments(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати список новин", {
-        duration: 2000,
-      });
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch news failed.",
         statusCode: res.statusCode,
@@ -110,9 +102,6 @@ export const apiGetDiscussions = createAsyncThunk<
   try {
     const res = await fetchDiscussions(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати список обговорень", {
-        duration: 2000,
-      });
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch discussions failed.",
         statusCode: res.statusCode,
@@ -134,9 +123,6 @@ export const apiGetOpinions = createAsyncThunk<
   try {
     const res = await fetchOpinions(dto);
     if (res.statusCode !== 200) {
-      toast.error("Нажаль не вдалося отримати список обговорень", {
-        duration: 2000,
-      });
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch discussions failed.",
         statusCode: res.statusCode,

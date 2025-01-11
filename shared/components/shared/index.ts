@@ -16,6 +16,7 @@ export { Pagination } from "./pagination";
 export { DiscussionTable } from "./discussion-table";
 export { UserForm } from "./user-form";
 export { Footer } from "./footer";
+export { SearchInput } from "./search-input";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";

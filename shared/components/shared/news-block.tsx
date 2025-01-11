@@ -1,63 +1,27 @@
 import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { NewsItem } from "./news-item";
+import { News } from "@/types";
 
 interface NewsBlockProps {
   className?: string;
+  news: News[] | undefined;
 }
-export const NewsBlock = ({ className }: NewsBlockProps) => {
+export const NewsBlock = ({ className, news }: NewsBlockProps) => {
+  if (!news) return <p className="text-center">Не було знайдено новин..</p>;
   return (
     <>
-      <div className={cn("news-block ", className)}>
-        <NewsItem
-          id="1"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="2"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="3"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="4"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem id="5" title="New Title" />
-        <NewsItem
-          id="6"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="7"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="8"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
-        <NewsItem
-          id="9"
-          title="New Title"
-          description="some description, bla bla blaaa lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia"
-        />
+      <div className={cn("news-block h-full", className)}>
+        {news &&
+          news.map((item) => (
+            <NewsItem
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              description={item.content}
+              date={item.createdAt}
+            />
+          ))}
       </div>
     </>
   );
