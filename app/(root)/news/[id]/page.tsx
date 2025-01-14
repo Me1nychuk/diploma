@@ -10,9 +10,11 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
   return (
     <>
-      <div className="">
+      <div>
         {id && <NewsArticle id={id} />}
-        {!id && <p className="mt-50 text-4xl">ID - новини не знайдено</p>}
+        {!id && (
+          <p className="mt-50 text-4xl text-center">ID - новини не знайдено</p>
+        )}
       </div>
     </>
   );

@@ -20,6 +20,7 @@ export { SearchInput } from "./search-input";
 export { DiscussionsPageContent } from "./discussions-page-content";
 export { NewsArticle } from "./news-article";
 export { Comments } from "./comments";
+export { DiscussionArticle } from "./discussion-article";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";

@@ -1,10 +1,17 @@
+import { DiscussionArticle } from "@/shared/components/shared";
 import React from "react";
 
-const DiscussionPage: React.FC = () => {
+interface PageProps {
+  params: { id: string };
+}
+
+const DiscussionPage: React.FC<PageProps> = ({ params }) => {
+  const { id } = params;
   return (
     <>
-      <div className="  grid  place-items-center">
-        <p className="mt-50 text-4xl"> DiscussionPage</p>
+      <div>
+        {id && <DiscussionArticle id={id} />}
+        {!id && <p className="mt-50 text-4xl">ID - обговорення не знайдено</p>}
       </div>
     </>
   );

@@ -20,7 +20,7 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
     isLoading,
     data: { discussions },
   } = useAppSelector((state) => state.data);
-  console.log(discussions);
+
   const dispatch = useAppDispatch();
   const params = useSearchParamsCust();
   const sortValues = {

@@ -1,11 +1,12 @@
-import { Comment as TComment } from "@/types";
+import { Opinion, Comment as TComment } from "@/types";
 
 interface CommentsProps {
-  comments: TComment[];
+  comments: TComment[] | Opinion[];
   author?: string;
 }
 
 const Comments: React.FC<CommentsProps> = ({ comments, author }) => {
+  console.log(comments);
   return (
     <>
       <h2 className=" font-bold ml-3">Коментарі</h2>
