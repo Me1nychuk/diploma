@@ -1,0 +1,30 @@
+@use "../utils/mixins" as mx;
+
+.comments-block {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+  @include mx.mq("md", "max") {
+    padding: 5px;
+  }
+}
+.comments-block > li {
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  p.author {
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  p.text {
+    font-size: 12px;
+  }
+  p.date {
+    font-size: 12px;
+  }
+  div.title-block {
+    display: flex;
+    justify-content: space-between;
+  }
+}

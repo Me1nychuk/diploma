@@ -17,7 +17,7 @@ export default function HomeLayout({
     <>
       <Container className=" relative  flex-1 glass max-w-[1400px]  max-h-full rounded-2xl px-4 py-3 ">
         <Header className="absolute w-[calc(100%-32px)] border-b-2 border-text   py-4  " />
-        <main className="pt-[85px] pb-[56px]">
+        <main className="pt-[85px] mb-[80px] max-xs:mb-[95px] ">
           {modal}
           {children}
         </main>

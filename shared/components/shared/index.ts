@@ -18,6 +18,8 @@ export { UserForm } from "./user-form";
 export { Footer } from "./footer";
 export { SearchInput } from "./search-input";
 export { DiscussionsPageContent } from "./discussions-page-content";
+export { NewsArticle } from "./news-article";
+export { Comments } from "./comments";
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";

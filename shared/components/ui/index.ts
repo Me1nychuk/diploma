@@ -22,6 +22,7 @@ export { Switch } from "./switch";
 export { Tooltip } from "./tooltip";
 export { LogoIcon } from "./logo";
 export { InputWithState } from "./input-with-state";
+export { Textarea } from "./textarea";
 export {
   Table,
   TableHeader,

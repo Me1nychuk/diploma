@@ -52,8 +52,9 @@ export const NewsPageContent: React.FC = () => {
               value={params.getParams.search || ""}
               onChange={params.updateSearch}
             />
-            <div className="flex gap-5 max-sm:justify-between">
+            <div className="flex max-xs:flex-col gap-5 max-sm:justify-between">
               <SelectSortType
+                className="max-xs:w-full"
                 values={sortValues}
                 selected={
                   params.getParams.sortBy ? params.getParams.sortBy : "date"
@@ -62,6 +63,7 @@ export const NewsPageContent: React.FC = () => {
                 label="за чим сортувати"
               />
               <SelectSortType
+                className="max-xs:w-full"
                 values={orderValues}
                 selected={
                   params.getParams.order ? params.getParams.order : "asc"
@@ -77,7 +79,7 @@ export const NewsPageContent: React.FC = () => {
           )}
           {news?.page && news?.totalPages && news?.totalPages && (
             <Pagination
-              classname="absolute bottom-[100px] left-1/2 -translate-x-1/2"
+              classname="my-5"
               hasNextPage={news.page < news.totalPages}
               hasPrevPage={news.page > 1}
               totalPages={news.totalPages}

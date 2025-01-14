@@ -1,0 +1,9 @@
+.description-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+  p {
+    text-indent: 10px;
+  }
+}

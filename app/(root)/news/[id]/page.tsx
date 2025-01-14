@@ -1,13 +1,21 @@
+import { NewsArticle } from "@/shared/components/shared";
 import React from "react";
 
-const NewsPage: React.FC = () => {
+interface PageProps {
+  params: { id: string };
+}
+
+const Page: React.FC<PageProps> = ({ params }) => {
+  const { id } = params;
+
   return (
     <>
-      <div className="bg-background  grid  place-items-center">
-        <p className="mt-50 text-4xl">NewsPage page</p>
+      <div className="">
+        {id && <NewsArticle id={id} />}
+        {!id && <p className="mt-50 text-4xl">ID - новини не знайдено</p>}
       </div>
     </>
   );
 };
 
-export default NewsPage;
+export default Page;

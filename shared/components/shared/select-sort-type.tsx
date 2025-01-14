@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { cn } from "@/shared/lib/utils";
 
 interface SelectSortTypeProps {
   className?: string;
@@ -26,9 +27,14 @@ export const SelectSortType = ({
 }: SelectSortTypeProps) => {
   return (
     <>
-      <div className={className}>
+      <div>
         <Select onValueChange={onChange} defaultValue={selected}>
-          <SelectTrigger className="w-[180px] h-12 py-2  rounded-xl border-gray-200/5 glass-2 ">
+          <SelectTrigger
+            className={cn(
+              "w-[180px] h-12 py-2  rounded-xl border-gray-200/5 glass-2 ",
+              className
+            )}
+          >
             <SelectValue placeholder={`Сортування: ${values[selected]}`} />
           </SelectTrigger>
           <SelectContent className="w-[180px] rounded-xl border-gray-200/5 glass-2 p-0">
