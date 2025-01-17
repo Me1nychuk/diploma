@@ -41,6 +41,9 @@ export const Navbar = ({ admin = false }: NavbarProps) => {
                   <Link href="">Контакти </Link>
                 </li>
                 <li>
+                  <Link href="/composition">Склад Кафедри</Link>
+                </li>
+                <li>
                   <Link href="/news">Новини кафедри</Link>
                 </li>
               </ul>

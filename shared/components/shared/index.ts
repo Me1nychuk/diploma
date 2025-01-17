@@ -18,6 +18,10 @@ export { UserForm } from "./user-form";
 export { Footer } from "./footer";
 export { SearchInput } from "./search-input";
 export { DiscussionsPageContent } from "./discussions-page-content";
+export { Table } from './Table/Table';
+export { TableHead } from './Table/TableHead/TableHead';
+export { TableRecord } from './Table/TableRecord/TableRecord';
+
 
 // AuthProvider
 export { AuthProvider } from "./auth-provider";
