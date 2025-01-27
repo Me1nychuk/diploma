@@ -60,6 +60,25 @@ export const useSearchParamsCust = () => {
     }));
   };
 
+  const clearParams = () => {
+    setParams({
+      per_page: undefined,
+      page: undefined,
+      search: undefined,
+      sortBy: undefined,
+      order: undefined,
+      authorId: undefined,
+    });
+    const queryParams = new URLSearchParams();
+
+    queryParams.set("per_page", "");
+    queryParams.set("page", "");
+    queryParams.set("search", "");
+    queryParams.set("sortBy", "");
+    queryParams.set("order", "");
+    queryParams.set("authorId", "");
+  };
+
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -93,5 +112,6 @@ export const useSearchParamsCust = () => {
     updateSearch,
     updatePage,
     updateAuthorId,
+    clearParams,
   };
 };

@@ -1,0 +1,35 @@
+.admin-nav {
+  display: flex;
+  width: 100%;
+  margin: 12px 0;
+  border-bottom: 1px solid var(--text);
+  li {
+    position: relative;
+    padding: 5px 10px;
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+
+    span {
+      @apply max-sm:hidden;
+    }
+  }
+  li:hover {
+    color: var(--accent);
+    ::after {
+      position: absolute;
+      z-index: 2;
+      content: "";
+      width: 100%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: var(--accent);
+    }
+  }
+}

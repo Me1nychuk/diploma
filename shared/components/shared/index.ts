@@ -31,3 +31,5 @@ export { HeroSection, Greetings } from "./main-page";
 export { AboutUsContent } from "./about-us";
 // Authentication
 export { RegisterForm, LoginForm } from "./auth";
+// Admin
+export { AdminContent } from "./admin";

@@ -58,8 +58,9 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
               value={params.getParams.search || ""}
               onChange={params.updateSearch}
             />
-            <div className="flex gap-5 max-sm:justify-between">
+            <div className="flex max-xs:flex-col gap-5 max-sm:justify-between">
               <SelectSortType
+                className="max-xs:w-full"
                 values={sortValues}
                 selected={
                   params.getParams.sortBy ? params.getParams.sortBy : "date"
@@ -68,6 +69,7 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
                 label="за чим сортувати"
               />
               <SelectSortType
+                className="max-xs:w-full"
                 values={orderValues}
                 selected={
                   params.getParams.order ? params.getParams.order : "asc"

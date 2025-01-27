@@ -1,16 +1,13 @@
-import React from "react";
-import type { Metadata } from "next";
+import React, { Suspense } from "react";
+import { Loader2 } from "lucide-react";
+import { AdminContent } from "@/shared/components/shared";
 
-export const metadata: Metadata = {
-  title: "NUWM | Admin panel",
-  description: ", ..",
-};
 const AdminPage: React.FC = () => {
   return (
     <>
-      <div className="bg-background  grid  place-items-center">
-        <p className="mt-50 text-4xl">AdminPage page</p>
-      </div>
+      <Suspense fallback={<Loader2 className=" animate-spin mx-auto mt-2" />}>
+        <AdminContent />
+      </Suspense>
     </>
   );
 };
