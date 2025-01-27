@@ -6,14 +6,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
+} from "@/shared/components/ui/sheet";
 import { Menu } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../ui/accordion";
+} from "@/shared/components/ui/accordion";
 import Link from "next/link";
 
 interface MobileNavbarProps {

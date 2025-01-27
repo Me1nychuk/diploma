@@ -5,7 +5,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "../ui/navigation-menu";
+} from "@/shared/components/ui/navigation-menu";
 import Link from "next/link";
 
 interface NavbarProps {
@@ -80,6 +80,9 @@ export const Navbar = ({ admin = false }: NavbarProps) => {
               <ul className="nav-list">
                 <li>
                   <Link href="/chat">Живий чат</Link>
+                </li>
+                <li>
+                  <Link href="/discussions">Дискусії</Link>
                 </li>
                 <li>
                   <Link href="/">Неформальна освіта</Link>

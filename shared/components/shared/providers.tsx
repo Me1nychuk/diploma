@@ -8,7 +8,7 @@ import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import store, { persistor } from "@/shared/store/store";
 import { PersistGate } from "redux-persist/integration/react";
-import { AuthProvider } from "./auth-provider";
+import { AuthProvider } from "@/shared/components/shared/auth/auth-provider";
 
 interface ProvidersProps {
   children?: React.ReactNode;

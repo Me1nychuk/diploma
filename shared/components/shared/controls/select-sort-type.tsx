@@ -8,7 +8,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/shared/components/ui/select";
 import { cn } from "@/shared/lib/utils";
 
 interface SelectSortTypeProps {

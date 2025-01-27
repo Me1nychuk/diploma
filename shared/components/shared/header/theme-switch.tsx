@@ -3,7 +3,7 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
-import { Skeleton } from "../ui";
+import { Skeleton } from "@/shared/components/ui";
 
 export const ThemeSwitch = () => {
   const [mounted, setMounted] = React.useState(false);

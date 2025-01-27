@@ -1,7 +1,7 @@
 "use client";
 import { Search } from "lucide-react";
 import React from "react";
-import { Input } from "../ui";
+import { Input } from "@/shared/components/ui";
 import { cn } from "@/shared/lib/utils";
 import { useDebounce } from "react-use";
 

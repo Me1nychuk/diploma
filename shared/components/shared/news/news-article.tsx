@@ -1,26 +1,23 @@
 "use client";
-import { createOpinion, fetchDiscussionById } from "@/shared/services";
-import { useAppSelector } from "@/shared/store/store";
-import { Discussion, Role } from "@/types";
-import React, { useEffect } from "react";
-import { Button, Label, Textarea } from "../ui";
-import { Comments } from "./comments";
 import { cn } from "@/shared/lib/utils";
+import { createComment, fetchNewsById } from "@/shared/services";
+import { useAppSelector } from "@/shared/store/store";
+import { News, Role } from "@/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import React, { useEffect } from "react";
+import { Comments } from "@/shared/components/shared/";
+import { Button, Label, Textarea } from "@/shared/components/ui";
 
-interface DiscussionArticleProps {
-  id: string;
+interface NewsArticleProps {
   className?: string;
+  id: string;
 }
 
-const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
-  id,
-  className,
-}) => {
+const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isError, setError] = React.useState(false);
-  const [discussion, setDiscussion] = React.useState<Discussion>();
+  const [news, setNews] = React.useState<News>();
   const [comment, setComment] = React.useState("");
   const { currentUser } = useAppSelector((state) => state.user);
 
@@ -29,7 +26,7 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
       setIsLoading(true);
       setError(false);
       if (comment.trim().length == 0) return;
-      await createOpinion({ discussionId: id, content: comment });
+      await createComment({ newsId: id, content: comment });
     } catch (err: unknown) {
       console.log(err);
       setError(true);
@@ -40,14 +37,14 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
   };
 
   useEffect(() => {
-    const getDiscussion = async () => {
+    const getNews = async () => {
       try {
         setIsLoading(true);
-        const res = await fetchDiscussionById(id);
+        const res = await fetchNewsById(id);
         if (res.statusCode !== 200) {
           setError(true);
         } else {
-          setDiscussion(res.data);
+          setNews(res.data);
           setError(false);
         }
       } catch (err: unknown) {
@@ -58,39 +55,37 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
       }
     };
 
-    getDiscussion();
+    getNews();
   }, [id]);
   return (
     <div className={cn("w-full", className)}>
       {isLoading && <Loader2 className="animate-spin mx-auto my-5" size={40} />}
       {isError && !isLoading && <h2>Сталась помилка, спробуйте ще раз</h2>}
-      {!isLoading && !isError && discussion && (
+      {!isLoading && !isError && news && (
         <>
           <div className="flex flex-col items-start justify-between gap-2 max-sm:px-2 px-4 mb-5">
-            <h1 className="text-3xl font-bold  my-5">{discussion.title}</h1>
+            <h1 className="text-3xl font-bold  my-5">{news.title}</h1>
 
             <p className="text-sm  min-sm:self-end">
-              Дата публікації:{" "}
-              {new Date(discussion.createdAt).toLocaleDateString()}
+              Дата публікації: {new Date(news.createdAt).toLocaleDateString()}
             </p>
+            {currentUser?.role === Role.ADMIN && (
+              <Link
+                className="absolute top-[100px] right-5 cursor-pointer text-[8px] hover:opacity-75 transition-all duration-100"
+                href={`/news/${id}/edit`}
+              >
+                Редагувати
+              </Link>
+            )}
           </div>
 
-          {discussion.content ? (
+          {news.content ? (
             <div
               className="description-content"
-              dangerouslySetInnerHTML={{ __html: discussion.content }}
+              dangerouslySetInnerHTML={{ __html: news.content }}
             />
           ) : (
-            <p className="text-lg mb-5 ml-2">Немає опису..</p>
-          )}
-          {(currentUser?.role === Role.ADMIN ||
-            currentUser?.id === discussion.author.id) && (
-            <Link
-              className="block p-1  bg-accent rounded-xl  text-center cursor-pointer text-lg hover:opacity-75 transition-all duration-100"
-              href={`/discussions/${id}/edit`}
-            >
-              Редагувати
-            </Link>
+            <p className="text-lg">Немає опису..</p>
           )}
           <div className="bg-text h-[1px] w-full mb-2 mt-9"></div>
           {currentUser?.id ? (
@@ -122,11 +117,11 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
             </p>
           )}
           <div className="bg-text h-[1px] w-full my-2 "></div>
-          <Comments comments={discussion.opinions} author={currentUser?.id} />
+          <Comments comments={news.comments} author={currentUser?.id} />
         </>
       )}
     </div>
   );
 };
 
-export { DiscussionArticle };
+export { NewsArticle };

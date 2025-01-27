@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button } from "../ui";
+import { Button } from "@/shared/components/ui";
 import { cn } from "@/shared/lib/utils";
 
 interface PaginationProps {

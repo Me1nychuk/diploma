@@ -1,98 +1,41 @@
 "use client";
 import { cn } from "@/shared/lib/utils";
-import { fetchUserByIdOrEmail } from "@/shared/services";
+import { fetchDiscussions, fetchUserByIdOrEmail } from "@/shared/services";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
-import { User } from "@/types";
+import { Discussion, User } from "@/types";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
-import { DiscussionTable } from "./discussion-table";
+import { DiscussionTable } from "@/shared/components/shared";
 
 interface ProfileContentProps {
   className?: string;
 }
 
-const discussions = [
-  {
-    id: "1",
-    title:
-      "Тема обговорення 1 loremsdsdsdasd afsd g g sdgf s asf afasfdasfasf asfa fg",
-    content: "Це перше обговорення.",
-
-    opinions: [
-      {
-        id: "o1",
-        content: "Це моя думка про перше обговорення.",
-        authorId: "a1",
-        createdAt: "2023-01-01",
-      },
-      {
-        id: "o2",
-        content: "Інша думка про перше обговорення.",
-        authorId: "a1",
-        createdAt: "2023-01-02",
-      },
-    ],
-    isApproved: true,
-    createdAt: "2023-01-01",
-    updatedAt: "2023-01-03",
-  },
-  {
-    id: "2",
-    title: "Тема обговорення 2",
-    content: "Це друге обговорення.",
-
-    opinions: [
-      {
-        id: "o3",
-        content: "Це моя думка про друге обговорення.",
-        authorId: "a1",
-        createdAt: "2023-02-01",
-      },
-    ],
-    isApproved: false,
-    createdAt: "2023-02-01",
-    updatedAt: "2023-02-03",
-  },
-  {
-    id: "3",
-    title: "Тема обговорення 3",
-    content: "Це третє обговорення.",
-
-    opinions: [
-      {
-        id: "o4",
-        content: "Це моя думка про третє обговорення.",
-        authorId: "a1",
-        createdAt: "2023-03-01",
-      },
-      {
-        id: "o5",
-        content: "Інша думка про третє обговорення.",
-        authorId: "a1",
-        createdAt: "2023-03-02",
-      },
-    ],
-    isApproved: true,
-    createdAt: "2023-03-01",
-    updatedAt: "2023-03-03",
-  },
-];
-
 const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
   const { currentUser, isLoading } = useAppSelector((state) => state.user);
   const [user, setUser] = React.useState<User | null>(null);
+  const [data, setData] = React.useState<Discussion[]>([]);
   const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
 
-  const fetchUserData = async () => {
+  const fetchAllData = async () => {
     try {
       if (currentUser) {
-        const data = await fetchUserByIdOrEmail(currentUser.id);
-        setUser(data.data);
+        const userData = await fetchUserByIdOrEmail(currentUser.id);
+        setUser(userData.data);
+        const data = await fetchDiscussions({
+          per_page: "10",
+          page: "1",
+          search: "",
+          sortBy: "date",
+          order: "asc",
+          authorId: currentUser.id,
+        });
+        setData(data.data);
       }
     } catch (error) {
       console.error("Failed to fetch user data", error);
@@ -106,7 +49,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
 
   React.useEffect(() => {
     if (currentUser) {
-      fetchUserData();
+      fetchAllData();
     }
   }, [currentUser]);
 
@@ -157,7 +100,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
             </div>
           </div>
 
-          <DiscussionTable discussions={discussions} />
+          <DiscussionTable discussions={data} />
 
           <div className="flex justify-between max-sm:flex-col max-sm:gap-5 items-center">
             <Link
