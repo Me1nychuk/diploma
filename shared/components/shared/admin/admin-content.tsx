@@ -3,7 +3,7 @@
 import { cn } from "@/shared/lib/utils";
 import { useAppSelector } from "@/shared/store/store";
 import { Role } from "@/types";
-import { Newspaper, Speech, User } from "lucide-react";
+import { ArrowLeft, Newspaper, Speech, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { NewsPanel } from "./news-panel";
@@ -22,12 +22,18 @@ const AdminContent: React.FC = ({}) => {
   }, [currentUser, router]);
   return (
     <>
-      <div className="flex gap-2 items-center max-sm:flex-col max-sm:items-start">
+      <div className="flex gap-2 items-center max-sm:flex-col max-sm:items-start relative">
         <h1 className="text-xl max-sm:text-base font-bold">
           Панель адміністратора
         </h1>
         <p className="max-sm:hidden"> - </p>
         <p>Адміністратор: {currentUser?.fullname}</p>
+        <button
+          onClick={() => router.back()}
+          className="absolute right-2 cursor-pointer hover:opacity-65 transition-all duration-200"
+        >
+          <ArrowLeft size={20} />
+        </button>
       </div>
       <div>
         <ul className="admin-nav">
