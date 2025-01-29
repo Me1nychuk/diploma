@@ -1,0 +1,28 @@
+.admin-panel-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--text);
+
+  li {
+    width: 100%;
+    text-align: center;
+    color: var(--text);
+    a {
+      padding: 10px 20px;
+      display: block;
+      width: 100%;
+    }
+  }
+  li:not(:last-child) {
+    border-bottom: 1px solid var(--text);
+  }
+
+  li:hover {
+    background-color: var(--text);
+    color: var(--background);
+    transition: all 0.2s ease-in-out;
+  }
+}

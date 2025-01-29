@@ -6,15 +6,15 @@ import { Role } from "@/types";
 import { Newspaper, Speech, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { useSearchParamsCust } from "@/shared/hooks/useSearchParamsCust";
+import { NewsPanel } from "./news-panel";
+import { DiscussionPanel } from "./discussion-panel";
 
 const AdminContent: React.FC = ({}) => {
   const { currentUser } = useAppSelector((state) => state.user);
   const router = useRouter();
   const [chapter, setChapter] = React.useState<"users" | "news" | "discussins">(
-    "discussins"
+    "users"
   );
-  const params = useSearchParamsCust();
   useEffect(() => {
     if (currentUser?.role !== Role.ADMIN) {
       router.replace("/");
@@ -35,7 +35,6 @@ const AdminContent: React.FC = ({}) => {
             className={cn({ active: chapter === "users" })}
             onClick={() => {
               setChapter("users");
-              params.clearParams();
             }}
           >
             <User size={20} />
@@ -45,7 +44,6 @@ const AdminContent: React.FC = ({}) => {
             className={cn({ active: chapter === "news" })}
             onClick={() => {
               setChapter("news");
-              params.clearParams();
             }}
           >
             <Newspaper size={20} />
@@ -55,7 +53,6 @@ const AdminContent: React.FC = ({}) => {
             className={cn({ active: chapter === "discussins" })}
             onClick={() => {
               setChapter("discussins");
-              params.clearParams();
             }}
           >
             <Speech size={20} />
@@ -63,8 +60,8 @@ const AdminContent: React.FC = ({}) => {
           </li>
         </ul>
         {chapter === "users" && <div>users</div>}
-        {chapter === "news" && <div>news</div>}
-        {chapter === "discussins" && <div>discussins</div>}
+        {chapter === "news" && <NewsPanel />}
+        {chapter === "discussins" && <DiscussionPanel />}
       </div>
     </>
   );
