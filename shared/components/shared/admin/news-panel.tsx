@@ -12,10 +12,10 @@ const NewsPanel: React.FC<NewsPanelProps> = ({ className }) => {
     <div className={cn("flex flex-col justify-center", className)}>
       <ul className="admin-panel-list ">
         <li>
-          <Link href="/admin/news">Переглянути новини</Link>
+          <Link href="/news">Переглянути новини</Link>
         </li>
         <li>
-          <Link href="/admin/news/create">Додати новину</Link>
+          <Link href="/news/create">Додати новину</Link>
         </li>
       </ul>
       <div className="mt-5 relative pl-7 text-sm mx-auto text-center">

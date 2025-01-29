@@ -12,10 +12,10 @@ const DiscussionPanel: React.FC<DiscussionPanelProps> = ({ className }) => {
     <div className={cn("flex flex-col justify-center", className)}>
       <ul className="admin-panel-list">
         <li>
-          <Link href="/admin/discussions">Переглянути обговорення</Link>
+          <Link href="/discussions">Переглянути обговорення</Link>
         </li>
         <li>
-          <Link href="/admin/discussions/verify">
+          <Link href="/discussions/check">
             Переглянути обговорення для перевірки
           </Link>
         </li>

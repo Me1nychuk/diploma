@@ -71,7 +71,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
             </p>
             {currentUser?.role === Role.ADMIN && (
               <Link
-                className="absolute top-[100px] right-5 cursor-pointer text-[8px] hover:opacity-75 transition-all duration-100"
+                className="absolute top-[100px] right-5 cursor-pointer text-[12px] hover:opacity-75 transition-all duration-100"
                 href={`/news/${id}/edit`}
               >
                 Редагувати
