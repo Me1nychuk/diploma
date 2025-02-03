@@ -9,7 +9,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
-import { DiscussionTable } from "@/shared/components/shared";
+import { DiscussionTable, PopupConfirm } from "@/shared/components/shared";
 
 interface ProfileContentProps {
   className?: string;
@@ -117,9 +117,11 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
               >
                 Вийти
               </Button>
-              <Button className="max-sm:w-full bg-red-700 text-white rounded-xl shadow-md active:translate-y-[2px] hover:opacity-70 transition-all duration-200 hover:scale-105">
-                Видалити акаунт
-              </Button>
+              <PopupConfirm onClick={() => {}}>
+                <Button className="max-sm:w-full bg-red-700 text-white rounded-xl shadow-md active:translate-y-[2px] hover:opacity-70 transition-all duration-200 hover:scale-105">
+                  Видалити акаунт
+                </Button>
+              </PopupConfirm>
             </div>
           </div>
         </div>
