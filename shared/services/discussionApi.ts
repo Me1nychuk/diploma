@@ -45,9 +45,12 @@ export const createDiscussion = async (
     };
   }
 };
-export const updateDiscussion = async (dto: Partial<Discussion>) => {
+export const updateDiscussion = async (
+  id: string,
+  dto: Partial<Discussion>
+) => {
   try {
-    const response = await axiosInstance.put(`discussions/${dto.id}`, {
+    const response = await axiosInstance.put(`discussions/${id}`, {
       ...dto,
     });
     return {

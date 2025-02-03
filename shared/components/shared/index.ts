@@ -6,6 +6,7 @@ export { MiniGallery } from "./mini-gallery";
 export { InfoBlock } from "./info-block";
 export { UserForm } from "./user-form";
 export { Footer } from "./footer";
+export { PopupConfirm } from "./popup-confirm";
 
 // Main page
 export { HeroSection, Greetings } from "./main-page";
@@ -34,3 +35,5 @@ export {
 } from "./header";
 // Controls
 export { Pagination, SelectSortType, SearchInput, Comments } from "./controls";
+// Edit
+export { EditArticleForm } from "./edit";

@@ -5,7 +5,18 @@ export { Calendar } from "./calendar";
 export { Carousel } from "./carousel";
 export { Checkbox } from "./checkbox";
 export { ContextMenu } from "./context-menu";
-export { Dialog } from "./dialog";
+export {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  DialogOverlay,
+  DialogPortal,
+} from "./dialog";
 export { DropdownMenu } from "./dropdown-menu";
 export { HoverCard } from "./hover-card";
 export { Input } from "./input";

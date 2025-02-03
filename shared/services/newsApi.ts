@@ -37,9 +37,9 @@ export const createNews = async (dto: {
     }
   }
 };
-export const updateNews = async (dto: Partial<News>) => {
+export const updateNews = async (id: string, dto: Partial<News>) => {
   try {
-    const res = await axiosInstance.patch("news", { ...dto });
+    const res = await axiosInstance.patch(`news/${id}`, { ...dto });
     return {
       statusCode: res.status,
       data: res.data,
