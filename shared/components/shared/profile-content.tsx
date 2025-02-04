@@ -19,6 +19,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
   const { currentUser, isLoading } = useAppSelector((state) => state.user);
   const [user, setUser] = React.useState<User | null>(null);
   const [data, setData] = React.useState<Discussion[]>([]);
+
   const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
 
@@ -100,7 +101,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
             </div>
           </div>
 
-          <DiscussionTable discussions={data} />
+          {/* <DiscussionTable discussions={data} /> */}
 
           <div className="flex justify-between max-sm:flex-col max-sm:gap-5 items-center">
             <Link
