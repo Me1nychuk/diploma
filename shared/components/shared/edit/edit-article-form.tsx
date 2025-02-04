@@ -40,6 +40,10 @@ export const EditArticleForm: React.FC<EditArticleFormProps> = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <p className="text-sm opacity-80 text-center">
+          * Для створення абзацу використовуйте тег &lt;p&gt; та &lt;/p&gt;,
+          тобто описуйте абзац отак - &lt;p&gt; КОНТЕНТ... &lt;/p&gt;
+        </p>
         <Button
           className="rounded-xl max-sm:text-base text-black bg-green-400 text-xl font-bold hover:bg-white hover:text-green-400 transition-all duration-200 "
           onClick={onSubmit}

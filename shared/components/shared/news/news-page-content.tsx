@@ -33,8 +33,8 @@ export const NewsPageContent: React.FC = () => {
         per_page: params.getParams.per_page || "10",
         page: params.getParams.page || "1",
         search: params.getParams.search || "",
-        sortBy: (params.getParams.sortBy as "title" | "date") || "title",
-        order: (params.getParams.order as "asc" | "desc") || "asc",
+        sortBy: (params.getParams.sortBy as "title" | "date") || "date",
+        order: (params.getParams.order as "asc" | "desc") || "desc",
       })
     );
   }, [dispatch, params.getParams]);
@@ -46,7 +46,7 @@ export const NewsPageContent: React.FC = () => {
           Новини кафедри
         </h1>
 
-        <div>
+        <div className="max-sm:pb-16">
           <div className="flex max-sm:flex-col gap-5 justify-between mb-5">
             <SearchInput
               value={params.getParams.search || ""}
@@ -79,7 +79,7 @@ export const NewsPageContent: React.FC = () => {
           )}
           {news?.page && news?.totalPages && news?.totalPages && (
             <Pagination
-              classname="my-5"
+              classname="absolute bottom-[100px] left-1/2 -translate-x-1/2"
               hasNextPage={news.page < news.totalPages}
               hasPrevPage={news.page > 1}
               totalPages={news.totalPages}

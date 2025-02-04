@@ -6,9 +6,9 @@ interface PageProps {
   params: { id: string };
 }
 
-const NewsEditPage: React.FC<PageProps> = ({ params }) => {
+const DiscussionEditPage: React.FC<PageProps> = ({ params }) => {
   const { id } = params;
   return <EditPageContent id={id} />;
 };
 
-export default NewsEditPage;
+export default DiscussionEditPage;
