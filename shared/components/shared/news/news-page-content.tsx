@@ -10,12 +10,15 @@ import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { apiGetNews } from "@/shared/store/data/operations";
 import { useSearchParamsCust } from "@/shared/hooks";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { Role } from "@/types";
 
 export const NewsPageContent: React.FC = () => {
   const {
     isLoading,
     data: { news },
   } = useAppSelector((state) => state.data);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const dispatch = useAppDispatch();
   const params = useSearchParamsCust();
   const sortValues = {
@@ -73,6 +76,14 @@ export const NewsPageContent: React.FC = () => {
               />
             </div>
           </div>
+          {currentUser && currentUser?.role === Role.ADMIN && (
+            <Link
+              href={"/news/create"}
+              className="block p-2 mb-5 bg-background rounded-xl text-center hover:bg-accent transition-all duration-200"
+            >
+              Створити новину
+            </Link>
+          )}
           {!isLoading && <NewsBlock news={news?.data} />}
           {isLoading && (
             <Loader2 className="animate-spin mx-auto my-5" size={40} />

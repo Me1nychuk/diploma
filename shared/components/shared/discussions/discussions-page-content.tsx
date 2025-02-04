@@ -10,6 +10,7 @@ import { Loader2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { useSearchParamsCust } from "@/shared/hooks";
 import { apiGetDiscussions } from "@/shared/store/data/operations";
+import Link from "next/link";
 
 interface DiscussionsPageContentProps {
   className?: string;
@@ -20,6 +21,8 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
     isLoading,
     data: { discussions },
   } = useAppSelector((state) => state.data);
+
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const dispatch = useAppDispatch();
   const params = useSearchParamsCust();
@@ -79,6 +82,14 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
               />
             </div>
           </div>
+          {currentUser && currentUser?.id && (
+            <Link
+              href={"/discussions/create"}
+              className="block p-2 mb-5 bg-background rounded-xl text-center hover:bg-accent transition-all duration-200"
+            >
+              Створити пост
+            </Link>
+          )}
           {!isLoading && <NewsBlock news={discussions?.data} />}
           {isLoading && (
             <Loader2 className="animate-spin mx-auto my-5" size={40} />
