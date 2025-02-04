@@ -9,7 +9,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
-import { DiscussionTable, PopupConfirm } from "@/shared/components/shared";
+import {
+  // DiscussionTable,
+  PopupConfirm,
+} from "@/shared/components/shared";
 
 interface ProfileContentProps {
   className?: string;
@@ -19,7 +22,6 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
   const { currentUser, isLoading } = useAppSelector((state) => state.user);
   const [user, setUser] = React.useState<User | null>(null);
   const [data, setData] = React.useState<Discussion[]>([]);
-
   const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
 
