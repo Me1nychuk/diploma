@@ -114,9 +114,9 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
             currentUser?.role === Role.ADMIN)) ||
           (isNews && currentUser?.role === Role.ADMIN)) && (
           <div className="">
-            <p className="mt-50 text-4xl text-center font-bold mb-5">
+            <h1 className="mt-50 text-4xl text-center font-bold mb-5">
               Редагування
-            </p>
+            </h1>
 
             <EditArticleForm
               title={newData.title}

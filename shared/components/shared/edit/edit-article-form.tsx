@@ -10,6 +10,8 @@ interface EditArticleFormProps {
   setDescription: (description: string) => void;
   onSubmit: () => void;
   onDelete: () => void;
+  onSubmitText?: string;
+  onDeleteText?: string;
 }
 export const EditArticleForm: React.FC<EditArticleFormProps> = ({
   className,
@@ -19,6 +21,8 @@ export const EditArticleForm: React.FC<EditArticleFormProps> = ({
   setDescription,
   onSubmit,
   onDelete,
+  onSubmitText = "Зберегти",
+  onDeleteText = "Видалити",
 }) => {
   return (
     <>
@@ -48,12 +52,12 @@ export const EditArticleForm: React.FC<EditArticleFormProps> = ({
           className="rounded-xl max-sm:text-base text-black bg-green-400 text-xl font-bold hover:bg-white hover:text-green-400 transition-all duration-200 "
           onClick={onSubmit}
         >
-          Зберегти
+          {onSubmitText}
         </Button>
 
         <PopupConfirm onClick={onDelete}>
           <Button className="rounded-xl text-black bg-red-400 text-xl font-bold hover:bg-white hover:text-red-400 transition-all duration-200 ">
-            Видалити
+            {onDeleteText}
           </Button>
         </PopupConfirm>
       </div>
