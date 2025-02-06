@@ -9,6 +9,7 @@ export interface DiscussionParameters {
   sortBy: "title" | "date";
   order: "asc" | "desc";
   authorId: string;
+  isVeriefied: "all" | "approved" | "unapproved";
 }
 export interface OpinionParameters {
   per_page: string;
@@ -100,10 +101,11 @@ export const fetchDiscussions = async ({
   sortBy = "title",
   order = "asc",
   authorId = "",
+  isVeriefied = "approved",
 }: DiscussionParameters) => {
   try {
     const res = await axiosInstance.get(
-      `discussions?per_page=${per_page}&page=${page}&sortBy=${sortBy}&order=${order}&author-id=${authorId}&search=${search}`
+      `discussions?per_page=${per_page}&page=${page}&sortBy=${sortBy}&order=${order}&author-id=${authorId}&search=${search}&isVeriefied=${isVeriefied}`
     );
     return {
       statusCode: res.status,

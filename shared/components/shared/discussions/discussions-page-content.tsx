@@ -44,6 +44,7 @@ const DiscussionsPageContent: React.FC<DiscussionsPageContentProps> = ({}) => {
         sortBy: (params.getParams.sortBy as "title" | "date") || "title",
         order: (params.getParams.order as "asc" | "desc") || "asc",
         authorId: params.getParams.authorId || "",
+        isVeriefied: "approved",
       })
     );
   }, [dispatch, params.getParams]);
