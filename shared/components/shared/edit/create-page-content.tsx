@@ -38,8 +38,11 @@ const CreatePageContent: React.FC<CreatePageContentProps> = ({ className }) => {
       setTitle("");
       setDescription("");
       toast.success(
-        "Пост успішно створений! Очікуйте підтвердження адміністратором."
+        `Пост успішно створений! Очікуйте підтвердження адміністратором. Ви будете перенаправлені на сторінку ${
+          isNews ? "новин" : "обговорень"
+        }.`
       );
+      router.push(isNews ? "/news" : "/discussions");
     } catch (error) {
       console.error(error);
       toast.error("Нажаль не вдалося створити пост");

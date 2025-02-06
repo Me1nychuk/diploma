@@ -2,17 +2,14 @@
 import { cn } from "@/shared/lib/utils";
 import { fetchDiscussions, fetchUserByIdOrEmail } from "@/shared/services";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
-import { Discussion, User } from "@/types";
+import { Discussion, PaginatedResponse, User } from "@/types";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
-import {
-  // DiscussionTable,
-  PopupConfirm,
-} from "@/shared/components/shared";
+import { DiscussionTable, PopupConfirm } from "@/shared/components/shared";
 
 interface ProfileContentProps {
   className?: string;
@@ -21,7 +18,7 @@ interface ProfileContentProps {
 const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
   const { currentUser, isLoading } = useAppSelector((state) => state.user);
   const [user, setUser] = React.useState<User | null>(null);
-  const [data, setData] = React.useState<Discussion[]>([]);
+  const [data, setData] = React.useState<PaginatedResponse<Discussion>>();
   const [loading, setLoading] = React.useState(true);
   const dispatch = useAppDispatch();
 
@@ -103,7 +100,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
             </div>
           </div>
 
-          {/* <DiscussionTable discussions={data} /> */}
+          <DiscussionTable discussions={data?.data} />
 
           <div className="flex justify-between max-sm:flex-col max-sm:gap-5 items-center">
             <Link
