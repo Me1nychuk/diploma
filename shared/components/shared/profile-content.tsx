@@ -34,6 +34,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
           sortBy: "date",
           order: "asc",
           authorId: currentUser.id,
+          isVeriefied: "all",
         });
         setData(data.data);
       }
