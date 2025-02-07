@@ -8,6 +8,8 @@ import { Comments } from "@/shared/components/shared";
 import { cn } from "@/shared/lib/utils";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import verifyDiscussionById from "@/shared/lib/verifyDiscussionById";
+import toast from "react-hot-toast";
 
 interface DiscussionArticleProps {
   id: string;
@@ -38,6 +40,21 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
       setIsLoading(false);
     }
   };
+  const handleVerefy = async () => {
+    try {
+      const res = await verifyDiscussionById(id);
+
+      if (res.statusCode !== 200) {
+        throw new Error(res.error);
+      }
+      toast.success("Пост успішно верифіковано!");
+      window.location.reload();
+    } catch (err: unknown) {
+      console.log(err);
+
+      toast.error("Помилка при верифікації посту! ");
+    }
+  };
 
   useEffect(() => {
     const getDiscussion = async () => {
@@ -63,7 +80,18 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
   return (
     <div className={cn("w-full", className)}>
       {isLoading && <Loader2 className="animate-spin mx-auto my-5" size={40} />}
-      {isError && !isLoading && <h2>Сталась помилка, спробуйте ще раз</h2>}
+      {isError && !isLoading && (
+        <h2 className="text-3xl font-bold  text-center my-5">
+          Сталась помилка, не вийшло завантажити пост.
+        </h2>
+      )}
+      {!isError &&
+        !discussion?.isApproved &&
+        currentUser?.role !== Role.ADMIN && (
+          <h2 className="text-3xl font-bold  text-center my-5">
+            Сталась помилка, здається це пост ще не існує.
+          </h2>
+        )}
       {!isLoading && !isError && discussion && (
         <>
           <div className="flex flex-col items-start justify-between gap-2 max-sm:px-2 px-4 mb-5">
@@ -93,6 +121,14 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
             </Link>
           )}
           <div className="bg-text h-[1px] w-full mb-2 mt-9"></div>
+          {currentUser?.role === Role.ADMIN && !discussion.isApproved && (
+            <Button
+              onClick={handleVerefy}
+              className="w-full rounded-xl font-bold hover:bg-green-400"
+            >
+              Верифікувати
+            </Button>
+          )}
           {currentUser?.id ? (
             <>
               <div className="glass-2 m-5 p-2 rounded-xl">

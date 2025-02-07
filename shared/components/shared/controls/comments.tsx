@@ -6,7 +6,6 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = ({ comments, author }) => {
-  console.log(comments);
   return (
     <>
       <h2 className=" font-bold ml-3">Коментарі</h2>

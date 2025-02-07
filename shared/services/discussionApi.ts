@@ -51,7 +51,7 @@ export const updateDiscussion = async (
   dto: Partial<Discussion>
 ) => {
   try {
-    const response = await axiosInstance.put(`discussions/${id}`, {
+    const response = await axiosInstance.patch(`discussions/${id}`, {
       ...dto,
     });
     return {
@@ -176,7 +176,7 @@ export const createOpinion = async (dto: {
 };
 export const updateOpinion = async (dto: Partial<Opinion>) => {
   try {
-    const response = await axiosInstance.put(`opinions/${dto.id}`, {
+    const response = await axiosInstance.patch(`opinions/${dto.id}`, {
       ...dto,
     });
     return {

@@ -21,6 +21,7 @@ export {
   DiscussionsPageContent,
   DiscussionTable,
   DiscussionArticle,
+  DiscussionVerifyPageContent,
 } from "./discussions";
 // News
 export { NewsArticle, NewsPageContent, NewsBlock, NewsItem } from "./news";
@@ -36,4 +37,4 @@ export {
 // Controls
 export { Pagination, SelectSortType, SearchInput, Comments } from "./controls";
 // Edit
-export { EditArticleForm } from "./edit";
+export { EditArticleForm, EditPageContent, CreatePageContent } from "./edit";
