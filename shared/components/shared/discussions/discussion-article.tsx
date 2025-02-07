@@ -4,12 +4,13 @@ import { useAppSelector } from "@/shared/store/store";
 import { Discussion, Role } from "@/types";
 import React, { useEffect } from "react";
 import { Button, Label, Textarea } from "@/shared/components/ui";
-import { Comments } from "@/shared/components/shared";
+import { Comments, PopupConfirm } from "@/shared/components/shared";
 import { cn } from "@/shared/lib/utils";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import verifyDiscussionById from "@/shared/lib/verifyDiscussionById";
 import toast from "react-hot-toast";
+import deletePostById from "@/shared/lib/deletePostById";
 
 interface DiscussionArticleProps {
   id: string;
@@ -38,6 +39,20 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
     } finally {
       setComment("");
       setIsLoading(false);
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      const res = await deletePostById(id, false);
+
+      if (res.statusCode !== 200) {
+        throw new Error(res.error);
+      }
+      toast.success("Пост успішно видалено!");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      toast.error("Помилка при видаленні посту! ");
     }
   };
   const handleVerefy = async () => {
@@ -119,6 +134,14 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
             >
               Редагувати
             </Link>
+          )}
+          {(currentUser?.role === Role.ADMIN ||
+            currentUser?.id === discussion.author.id) && (
+            <PopupConfirm onClick={handleDelete}>
+              <Button className="block w-full p-1 mt-5  bg-red-500 rounded-xl  text-center cursor-pointer text-lg hover:opacity-75 transition-all duration-100">
+                Видалити
+              </Button>
+            </PopupConfirm>
           )}
           <div className="bg-text h-[1px] w-full mb-2 mt-9"></div>
           {currentUser?.role === Role.ADMIN && !discussion.isApproved && (
