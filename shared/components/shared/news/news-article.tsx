@@ -6,8 +6,10 @@ import { News, Role } from "@/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { Comments } from "@/shared/components/shared/";
+import { Comments, PopupConfirm } from "@/shared/components/shared/";
 import { Button, Label, Textarea } from "@/shared/components/ui";
+import deletePostById from "@/shared/lib/deletePostById";
+import toast from "react-hot-toast";
 
 interface NewsArticleProps {
   className?: string;
@@ -36,6 +38,21 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const res = await deletePostById(id, true);
+
+      if (res.statusCode !== 200) {
+        throw new Error(res.error);
+      }
+      toast.success("Пост успішно видалено!");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      toast.error("Помилка при видаленні посту! ");
+    }
+  };
+
   useEffect(() => {
     const getNews = async () => {
       try {
@@ -60,7 +77,11 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
   return (
     <div className={cn("w-full", className)}>
       {isLoading && <Loader2 className="animate-spin mx-auto my-5" size={40} />}
-      {isError && !isLoading && <h2>Сталась помилка, спробуйте ще раз</h2>}
+      {isError && !isLoading && (
+        <h2 className="text-3xl font-bold  text-center my-5">
+          Сталась помилка, не вийшло завантажити пост.
+        </h2>
+      )}
       {!isLoading && !isError && news && (
         <>
           <div className="flex flex-col items-start justify-between gap-2 max-sm:px-2 px-4 mb-5">
@@ -76,6 +97,13 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
               >
                 Редагувати
               </Link>
+            )}
+            {currentUser?.role === Role.ADMIN && (
+              <PopupConfirm onClick={handleDelete}>
+                <Button className="block w-full p-1 mt-5  bg-red-500 rounded-xl  text-center cursor-pointer text-lg hover:opacity-75 transition-all duration-100">
+                  Видалити
+                </Button>
+              </PopupConfirm>
             )}
           </div>
 

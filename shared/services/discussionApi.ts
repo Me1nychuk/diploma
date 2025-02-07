@@ -105,7 +105,7 @@ export const fetchDiscussions = async ({
 }: DiscussionParameters) => {
   try {
     const res = await axiosInstance.get(
-      `discussions?per_page=${per_page}&page=${page}&sortBy=${sortBy}&order=${order}&author-id=${authorId}&search=${search}&isVeriefied=${isVeriefied}`
+      `discussions?per_page=${per_page}&page=${page}&sortBy=${sortBy}&order=${order}&author-id=${authorId}&search=${search}&verified=${isVeriefied}`
     );
     return {
       statusCode: res.status,
