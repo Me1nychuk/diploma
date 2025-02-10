@@ -18,7 +18,7 @@ export const MiniGallery = ({ className, gallery }: MiniGalleryProps) => {
   return (
     <div
       className={cn(
-        "w-[300px] min-sm:w-[450px]  min-md:w-[900px] h-[180px] min-sm:h-[265px] min-md:h-[530px] mx-auto",
+        "max-w-full min-xxs:w-[300px] min-sm:w-[450px]  min-md:w-[900px] h-[180px] min-sm:h-[265px] min-md:h-[530px] mx-auto",
         className
       )}
     >
@@ -30,14 +30,14 @@ export const MiniGallery = ({ className, gallery }: MiniGalleryProps) => {
                 <img
                   src={url}
                   alt={"Фото для посту" + title ? " - " + title : ""}
-                  className="w-[300px] min-sm:w-[450px]  min-md:w-[900px] h-[180px] min-sm:h-[265px] min-md:h-[530px] object-contain"
+                  className="max-w-full min-xxs:w-[300px] min-sm:w-[450px]  min-md:w-[900px] h-[180px] min-sm:h-[265px] min-md:h-[530px] object-contain"
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="bg-transparent hover:opacity-50   hover:bg-transparent" />
-        <CarouselNext className="bg-transparent hover:opacity-50 hover:bg-transparent" />
+        <CarouselPrevious className="max-xs:hidden bg-transparent hover:opacity-50   hover:bg-transparent" />
+        <CarouselNext className="max-xs:hidden bg-transparent hover:opacity-50 hover:bg-transparent" />
       </Carousel>
     </div>
   );
