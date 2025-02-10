@@ -3,7 +3,6 @@ import { cn } from "@/shared/lib/utils";
 import { Typewriter } from "react-simple-typewriter";
 import React from "react";
 import { LogoIcon } from "../../ui";
-import { MiniGallery } from "../mini-gallery";
 import { ChevronsDown } from "lucide-react";
 import Link from "next/link";
 
