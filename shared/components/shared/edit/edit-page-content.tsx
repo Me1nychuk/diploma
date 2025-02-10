@@ -15,6 +15,7 @@ import {
 import toast from "react-hot-toast";
 import { useAppSelector } from "@/shared/store/store";
 import { useRouter } from "next/navigation";
+import { EditableList } from "./editable-list";
 
 interface EditPageContentProps {
   className?: string;
@@ -30,12 +31,16 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
   const [newData, setNewData] = React.useState<{
     title: string;
     description: string;
-  }>({ title: "", description: "" });
+    imageUrl?: string[];
+  }>({ title: "", description: "", imageUrl: [] });
   const setTitle = (title: string) => {
     setNewData((prev) => ({ ...prev, title }));
   };
   const setDescription = (description: string) => {
     setNewData((prev) => ({ ...prev, description }));
+  };
+  const setPhotos = (photos: string[]) => {
+    setNewData((prev) => ({ ...prev, imageUrl: photos }));
   };
 
   const onSubmit = async () => {
@@ -48,6 +53,7 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
         await updateNews(id, {
           title: newData.title.trim(),
           content: newData.description.trim(),
+          imageUrl: newData.imageUrl,
         });
       } else {
         await updateDiscussion(id, {
@@ -55,10 +61,10 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
           content: newData.description.trim(),
         });
       }
-      toast.success("Новина успішно оновлена!");
+      toast.success("Пост успішно оновлена!");
     } catch (error) {
       console.error(error);
-      toast.error("Нажаль не вдалося оновити новину");
+      toast.error("Нажаль не вдалося оновити пост");
     }
   };
 
@@ -73,7 +79,7 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
       router.push(isNews ? "/news" : "/discussions");
     } catch (error) {
       console.error(error);
-      toast.error("Нажаль не вдалося видалити новину");
+      toast.error("Нажаль не вдалося видалити пост");
     }
   };
   React.useEffect(() => {
@@ -91,6 +97,7 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
           ...prev,
           title: response.data.title,
           description: response.data.content,
+          imageUrl: response.data.imageUrl || [],
         }));
         setIsLoading(false);
       } catch (error) {
@@ -117,7 +124,9 @@ const EditPageContent: React.FC<EditPageContentProps> = ({ id }) => {
             <h1 className="mt-50 text-4xl text-center font-bold mb-5">
               Редагування
             </h1>
-
+            {isNews && (
+              <EditableList array={newData.imageUrl} setArray={setPhotos} />
+            )}
             <EditArticleForm
               title={newData.title}
               setTitle={setTitle}

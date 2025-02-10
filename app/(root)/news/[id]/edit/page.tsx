@@ -11,7 +11,7 @@ const NewsEditPage: React.FC<PageProps> = ({ params }) => {
   const { id } = params;
   return (
     <Suspense fallback={<Loader2 className=" animate-spin mx-auto mt-2" />}>
-      <EditPageContent id={id} />;
+      <EditPageContent id={id} />
     </Suspense>
   );
 };

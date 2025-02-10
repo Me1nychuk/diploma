@@ -23,6 +23,20 @@ const slogans = [
   "Знання – це потужність, обчислення – це ключ!",
   "Від ідеї до реалізації: обчислення на всіх етапах!",
 ];
+const photos = [
+  {
+    url: "https://images.wallpaperscraft.ru/image/single/kompiuter_materinskaia_plata_kuler_201602_1280x720.jpg",
+    alt: "IT FOTO",
+  },
+  {
+    url: "https://images.wallpaperscraft.ru/image/single/bukvy_staryj_pechatnaia_mashinka_290439_1280x720.jpg",
+    alt: "IT FOTO",
+  },
+  {
+    url: "https://images.wallpaperscraft.ru/image/single/kod_simvoly_programmirovanie_178845_1280x720.jpg",
+    alt: "IT FOTO",
+  },
+];
 
 export const HeroSection = ({
   className,
@@ -52,7 +66,13 @@ export const HeroSection = ({
           <ChevronsDown color="currentColor" size={50} />
         </Link>
       </div>
-      <MiniGallery />
+      <ul className={cn("mini-gallery", className)}>
+        {photos.map((photo, index) => (
+          <li key={index} className="mini-gallery-item">
+            <img src={photo.url} alt={photo.alt} />
+          </li>
+        ))}
+      </ul>
       <h1
         className="text-3xl font-bold text-center underline italic"
         id="hero-section"

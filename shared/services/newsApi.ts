@@ -23,7 +23,10 @@ export const createNews = async (dto: {
   imageUrl?: string[];
 }) => {
   try {
-    const res = await axiosInstance.post("news", { ...dto });
+    const res = await axiosInstance.post("news", {
+      ...dto,
+      imageUrl: dto.imageUrl || [],
+    });
     return {
       statusCode: res.status,
       data: res.data,

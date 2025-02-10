@@ -37,4 +37,9 @@ export {
 // Controls
 export { Pagination, SelectSortType, SearchInput, Comments } from "./controls";
 // Edit
-export { EditArticleForm, EditPageContent, CreatePageContent } from "./edit";
+export {
+  EditArticleForm,
+  EditPageContent,
+  CreatePageContent,
+  EditableList,
+} from "./edit";

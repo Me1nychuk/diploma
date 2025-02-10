@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { EditArticleForm } from "@/shared/components/shared";
+import { EditableList, EditArticleForm } from "@/shared/components/shared";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/shared/store/store";
 import toast from "react-hot-toast";
@@ -16,6 +16,7 @@ const CreatePageContent: React.FC<CreatePageContentProps> = ({ className }) => {
   const router = useRouter();
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [photos, setPhotos] = React.useState<string[]>([]);
 
   const onSubmit = async () => {
     try {
@@ -23,24 +24,41 @@ const CreatePageContent: React.FC<CreatePageContentProps> = ({ className }) => {
         toast.error("Заголовок повинен містити не менше 5 символів");
         return;
       }
+      if (isNews && description.trim().length == 0) {
+        toast.error("Опис повинен бути заповнений");
+        return;
+      }
       if (isNews) {
-        await createNews({
+        const res = await createNews({
           title: title.trim(),
           content: description.trim(),
+          imageUrl: photos,
         });
+        if (!res || res.statusCode !== 201) {
+          toast.error("Нажаль не вдалося створити новину");
+          return;
+        }
       } else {
-        await createDiscussion({
+        const res = await createDiscussion({
           title: title.trim(),
           content: description.trim(),
         });
+        if (!res || res.statusCode !== 201) {
+          toast.error("Нажаль не вдалося створити обговорення");
+          return;
+        }
       }
 
       setTitle("");
       setDescription("");
+      setPhotos([]);
       toast.success(
-        `Пост успішно створений! Очікуйте підтвердження адміністратором. Ви будете перенаправлені на сторінку ${
-          isNews ? "новин" : "обговорень"
-        }.`
+        isNews
+          ? "Новина успішно створена!"
+          : "Обговорення успішно створено!\nОчікуйте переверіфікації адміністратором",
+        {
+          duration: 10000,
+        }
       );
       router.push(isNews ? "/news" : "/discussions");
     } catch (error) {
@@ -68,6 +86,7 @@ const CreatePageContent: React.FC<CreatePageContentProps> = ({ className }) => {
       <h1 className="mt-50 text-4xl text-center font-bold mb-5">
         {isNews ? "Створити новину" : "Створити обговорення"}
       </h1>
+      {isNews && <EditableList array={photos} setArray={setPhotos} />}
       <EditArticleForm
         onSubmit={onSubmit}
         onDelete={onDelete}

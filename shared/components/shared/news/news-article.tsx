@@ -6,7 +6,11 @@ import { News, Role } from "@/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { Comments, PopupConfirm } from "@/shared/components/shared/";
+import {
+  Comments,
+  MiniGallery,
+  PopupConfirm,
+} from "@/shared/components/shared/";
 import { Button, Label, Textarea } from "@/shared/components/ui";
 import deletePostById from "@/shared/lib/deletePostById";
 import toast from "react-hot-toast";
@@ -106,6 +110,10 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
               </PopupConfirm>
             )}
           </div>
+
+          {news.imageUrl.length > 0 && (
+            <MiniGallery gallery={news.imageUrl} title={news.title} />
+          )}
 
           {news.content ? (
             <div
