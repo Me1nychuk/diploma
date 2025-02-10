@@ -15,7 +15,7 @@ const DiscussionPanel: React.FC<DiscussionPanelProps> = ({ className }) => {
           <Link href="/discussions">Переглянути обговорення</Link>
         </li>
         <li>
-          <Link href="/discussions/check">
+          <Link href="/discussions/verify">
             Переглянути обговорення для перевірки
           </Link>
         </li>
