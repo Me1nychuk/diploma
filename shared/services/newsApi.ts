@@ -1,6 +1,6 @@
 import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
-import { News, Comment } from "@/types";
+import { News, Comment, PaginatedResponse, FecthError } from "@/types";
 
 export interface NewsParameters {
   per_page: string;
@@ -202,7 +202,9 @@ export const fetchComments = async ({
   newsId = "",
   authorId = "",
   order = "asc",
-}: CommentParameters) => {
+}: CommentParameters): Promise<
+  { statusCode: number; data: PaginatedResponse<Comment> } | FecthError
+> => {
   try {
     const response = await axiosInstance.get(
       `comments?per_page=${per_page}&page=${page}&newsId=${newsId}&author-id=${authorId}&order=${order}`

@@ -24,8 +24,8 @@ export default function RootLayout({
         )}
       >
         <Providers>{children}</Providers>
+        <Background />
       </body>
-      <Background />
     </html>
   );
 }

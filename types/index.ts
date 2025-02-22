@@ -19,6 +19,10 @@ export interface PaginatedResponse<T> {
   totalPages: number;
   page: number;
 }
+export interface FecthError {
+  statusCode: number;
+  error: string;
+}
 
 export interface Token {
   token: string;
