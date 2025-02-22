@@ -14,6 +14,7 @@ import {
 import { Button, Label, Textarea } from "@/shared/components/ui";
 import deletePostById from "@/shared/lib/deletePostById";
 import toast from "react-hot-toast";
+import { useFetchComments } from "@/shared/hooks/useFetchComments";
 
 interface NewsArticleProps {
   className?: string;
@@ -25,6 +26,12 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
   const [isError, setError] = React.useState(false);
   const [news, setNews] = React.useState<News>();
   const [comment, setComment] = React.useState("");
+  const {
+    comments,
+    getMore,
+    isNext,
+    isLoading: isLoadingComments,
+  } = useFetchComments(id);
   const { currentUser } = useAppSelector((state) => state.user);
 
   const handleComment = async () => {
@@ -153,7 +160,13 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
             </p>
           )}
           <div className="bg-text h-[1px] w-full my-2 "></div>
-          <Comments comments={news.comments} author={currentUser?.id} />
+          <Comments
+            comments={comments}
+            author={currentUser?.id}
+            isLoading={isLoadingComments}
+            isNext={isNext}
+            getMore={getMore}
+          />
         </>
       )}
     </div>

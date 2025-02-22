@@ -1,11 +1,23 @@
 import { Opinion, Comment as TComment } from "@/types";
+import { memo } from "react";
+import { Button } from "@/shared/components/ui";
+import { Loader } from "lucide-react";
 
 interface CommentsProps {
   comments: TComment[] | Opinion[];
   author?: string;
+  isLoading?: boolean;
+  isNext?: boolean;
+  getMore?: () => void;
 }
 
-const Comments: React.FC<CommentsProps> = ({ comments, author }) => {
+const CommentsComponent: React.FC<CommentsProps> = ({
+  comments,
+  author,
+  isNext,
+  getMore,
+  isLoading,
+}) => {
   return (
     <>
       <h2 className=" font-bold ml-3">Коментарі</h2>
@@ -36,8 +48,21 @@ const Comments: React.FC<CommentsProps> = ({ comments, author }) => {
           <p className="text-center font-bold">Немає коментарів</p>
         )}
       </ul>
+      {comments.length > 0 && (
+        <Button
+          className="w-[calc(100%-48px)] mx-6 bg-secondary rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!isNext || isLoading}
+          onClick={getMore}
+        >
+          {isLoading ? (
+            <Loader className="animate-spin" />
+          ) : (
+            "Більше коментарів"
+          )}
+        </Button>
+      )}
     </>
   );
 };
 
-export { Comments };
+export const Comments = memo(CommentsComponent);

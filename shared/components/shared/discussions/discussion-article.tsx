@@ -11,6 +11,7 @@ import Link from "next/link";
 import verifyDiscussionById from "@/shared/lib/verifyDiscussionById";
 import toast from "react-hot-toast";
 import deletePostById from "@/shared/lib/deletePostById";
+import { useFetchComments } from "@/shared/hooks/useFetchComments";
 
 interface DiscussionArticleProps {
   id: string;
@@ -25,6 +26,13 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
   const [isError, setError] = React.useState(false);
   const [discussion, setDiscussion] = React.useState<Discussion>();
   const [comment, setComment] = React.useState("");
+  const {
+    comments,
+    getMore,
+    isNext,
+    isLoading: isLoadingComments,
+  } = useFetchComments(id);
+
   const { currentUser } = useAppSelector((state) => state.user);
 
   const handleComment = async () => {
@@ -129,7 +137,7 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
           {(currentUser?.role === Role.ADMIN ||
             currentUser?.id === discussion.author.id) && (
             <Link
-              className="block p-1  bg-accent rounded-xl  text-center cursor-pointer text-lg hover:opacity-75 transition-all duration-100"
+              className="block p-1 mt-2  bg-accent rounded-xl  text-center cursor-pointer text-lg hover:opacity-75 transition-all duration-100"
               href={`/discussions/${id}/edit`}
             >
               Редагувати
@@ -181,7 +189,14 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
             </p>
           )}
           <div className="bg-text h-[1px] w-full my-2 "></div>
-          <Comments comments={discussion.opinions} author={currentUser?.id} />
+
+          <Comments
+            comments={comments}
+            author={currentUser?.id}
+            isLoading={isLoadingComments}
+            getMore={getMore}
+            isNext={isNext}
+          />
         </>
       )}
     </div>

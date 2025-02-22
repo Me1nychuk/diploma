@@ -12,6 +12,7 @@ import {
 import {
   Comment,
   Discussion,
+  FecthError,
   News,
   Opinion,
   PaginatedResponse,
@@ -79,8 +80,11 @@ export const apiGetComments = createAsyncThunk<
   { rejectValue: Error }
 >("data/fetchComments", async (dto, thunkAPI) => {
   try {
-    const res = await fetchComments(dto);
-    if (res.statusCode !== 200) {
+    const res:
+      | FecthError
+      | { statusCode: number; data: PaginatedResponse<Comment> } =
+      await fetchComments(dto);
+    if ("error" in res) {
       return thunkAPI.rejectWithValue({
         message: res.error || "Fetch news failed.",
         statusCode: res.statusCode,
