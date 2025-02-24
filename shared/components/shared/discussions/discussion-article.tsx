@@ -1,8 +1,12 @@
 "use client";
-import { createOpinion, fetchDiscussionById } from "@/shared/services";
+import {
+  createOpinion,
+  deleteOpinion,
+  fetchDiscussionById,
+} from "@/shared/services";
 import { useAppSelector } from "@/shared/store/store";
 import { Discussion, Role } from "@/types";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Button, Label, Textarea } from "@/shared/components/ui";
 import { Comments, PopupConfirm } from "@/shared/components/shared";
 import { cn } from "@/shared/lib/utils";
@@ -31,6 +35,7 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
     getMore,
     isNext,
     isLoading: isLoadingComments,
+    deleteComment,
   } = useFetchComments(id);
 
   const { currentUser } = useAppSelector((state) => state.user);
@@ -78,6 +83,24 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
       toast.error("Помилка при верифікації посту! ");
     }
   };
+
+  const handleDeleteComment = useCallback(async (id: string) => {
+    try {
+      await deleteOpinion(id);
+      deleteComment(id);
+      toast.success("Коментар успішно видалено!");
+    } catch (err: unknown) {
+      console.log(err);
+      toast.error("Помилка при видаленні коментаря!");
+    }
+  }, []);
+
+  const isAvailableToDelete = useCallback(
+    (authourId: string) => {
+      return authourId === currentUser?.id || currentUser?.role === Role.ADMIN;
+    },
+    [currentUser]
+  );
 
   useEffect(() => {
     const getDiscussion = async () => {
@@ -196,6 +219,8 @@ const DiscussionArticle: React.FC<DiscussionArticleProps> = ({
             isLoading={isLoadingComments}
             getMore={getMore}
             isNext={isNext}
+            onDelete={handleDeleteComment}
+            isAvailableToDelete={isAvailableToDelete}
           />
         </>
       )}

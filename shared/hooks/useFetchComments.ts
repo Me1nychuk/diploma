@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchComments, fetchOpinions } from "../services";
 import { Comment, FecthError, Opinion, PaginatedResponse } from "@/types";
+import { set } from "date-fns";
 
 export const useFetchComments = (id: string) => {
   const isNews = window.location.pathname.includes("news");
@@ -59,9 +60,20 @@ export const useFetchComments = (id: string) => {
     }
   };
 
+  const deleteComment = (id: string) => {
+    if (isNews) {
+      setComments((prev) =>
+        (prev as Comment[]).filter((comment) => comment.id !== id)
+      );
+    } else {
+      setComments((prev) =>
+        (prev as Opinion[]).filter((comment) => comment.id !== id)
+      );
+    }
+  };
   useEffect(() => {
     getComments();
   }, [page]);
 
-  return { comments, isNext, isLoading, getMore };
+  return { comments, isNext, isLoading, getMore, deleteComment };
 };
