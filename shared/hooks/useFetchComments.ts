@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchComments, fetchOpinions } from "../services";
 import { Comment, FecthError, Opinion, PaginatedResponse } from "@/types";
-import { set } from "date-fns";
 
 export const useFetchComments = (id: string) => {
   const isNews = window.location.pathname.includes("news");
