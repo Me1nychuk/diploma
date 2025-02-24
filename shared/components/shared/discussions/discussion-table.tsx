@@ -44,7 +44,7 @@ const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
                 <TableCell className="text-left line-clamp-2 pl-2">
                   <Link
                     className="hover:text-background hover:underline transition-all duration-100 "
-                    href={"/discussins/" + el.id}
+                    href={"/discussions/" + el.id}
                   >
                     {el.title}
                   </Link>
