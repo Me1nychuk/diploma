@@ -15,7 +15,7 @@ export { AboutUsContent } from "./about-us";
 // Authentication
 export { RegisterForm, LoginForm, AuthProvider } from "./auth";
 // Admin
-export { AdminContent } from "./admin";
+export { AdminContent, UsersPanel, NewsPanel, DiscussionPanel } from "./admin";
 // Discussions
 export {
   DiscussionsPageContent,
