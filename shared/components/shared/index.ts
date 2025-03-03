@@ -35,7 +35,13 @@ export {
   Header,
 } from "./header";
 // Controls
-export { Pagination, SelectSortType, SearchInput, Comments } from "./controls";
+export {
+  Pagination,
+  SelectSortType,
+  SearchInput,
+  Comments,
+  Modal,
+} from "./controls";
 // Edit
 export {
   EditArticleForm,
@@ -43,3 +49,5 @@ export {
   CreatePageContent,
   EditableList,
 } from "./edit";
+// Users
+export { UsersPageContent, UserList, UserArticle } from "./users";

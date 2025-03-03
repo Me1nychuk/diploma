@@ -1,11 +1,14 @@
+import { UserArticle } from "@/shared/components/shared";
+import { fetchUserByIdOrEmail } from "@/shared/services";
+import { notFound } from "next/navigation";
 import React from "react";
 
-const UserPage = ({ params: { id } }: { params: { id: string } }) => {
+const UserPage = async ({ params: { id } }: { params: { id: string } }) => {
+  const data = await fetchUserByIdOrEmail(id);
+  if (data.statusCode !== 200) return notFound();
   return (
     <>
-      <div className="bg-background  grid  place-items-center">
-        <p className="mt-50 text-4xl">UserPage id: {id}</p>
-      </div>
+      <UserArticle user={data.data} />
     </>
   );
 };

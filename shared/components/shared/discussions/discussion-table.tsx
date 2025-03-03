@@ -19,7 +19,7 @@ interface DiscussionTableProps {
 const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
   return (
     <>
-      {discussions ? (
+      {discussions && discussions.length > 0 ? (
         <Table className="max-w-full  max-h-80">
           <TableHeader>
             <TableRow>
@@ -50,7 +50,7 @@ const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
                   </Link>
                 </TableCell>
                 <TableCell className="p-[1px]  ">
-                  {el.opinions.length || 0}
+                  {el?.opinions?.length || 0}
                 </TableCell>
                 <TableCell className="text-nowrap ">
                   {new Date(el.createdAt).toLocaleDateString()}

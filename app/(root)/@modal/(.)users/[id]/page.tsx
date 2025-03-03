@@ -1,18 +1,16 @@
-"use client";
 import React from "react";
-// import { useRouter } from "next/navigation";
-import { TestModal } from "@/shared/components/shared/testModal";
-const Page: React.FC = () => {
-  // const router = useRouter();
+import { Modal, UserArticle } from "@/shared/components/shared";
+import { fetchUserByIdOrEmail } from "@/shared/services";
+import { notFound } from "next/navigation";
+const Page = async ({ params: { id } }: { params: { id: string } }) => {
+  const data = await fetchUserByIdOrEmail(id);
+  if (data.statusCode !== 200) return notFound();
 
   return (
     <>
-      {/* <div className="bg-black opacity-50  grid  place-items-center text-white h-screen w-screen absolute z-10">
-        user id page modal
-        <p onClick={() => router.back()}>Home</p>
-      </div> */}
-      <TestModal />
-      <p>User id</p>
+      <Modal>
+        <UserArticle user={data.data} />
+      </Modal>
     </>
   );
 };
