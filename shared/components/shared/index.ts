@@ -51,3 +51,5 @@ export {
 } from "./edit";
 // Users
 export { UsersPageContent, UserList, UserArticle } from "./users";
+// Chat
+export { ChatContent } from "./chat";
