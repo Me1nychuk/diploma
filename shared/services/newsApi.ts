@@ -207,7 +207,7 @@ export const fetchComments = async ({
 > => {
   try {
     const response = await axiosInstance.get(
-      `comments?per_page=${per_page}&page=${page}&newsId=${newsId}&author-id=${authorId}&order=${order}`
+      `comments?per_page=${per_page}&page=${page}&news-id=${newsId}&author-id=${authorId}&order=${order}`
     );
     return {
       statusCode: response.status,

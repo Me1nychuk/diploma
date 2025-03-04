@@ -1,17 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
+import { ChatContent } from "@/shared/components/shared";
 
 export const metadata: Metadata = {
   title: "NUWM | Live chat",
-  description: ", ..",
+  description: "Live chat, with other users",
 };
 
 const ChatPage: React.FC = () => {
   return (
     <>
-      <div className="bg-background  grid  place-items-center">
-        <p className="mt-50 text-4xl">ChatPage page</p>
-      </div>
+      <ChatContent />
     </>
   );
 };

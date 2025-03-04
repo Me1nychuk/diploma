@@ -19,7 +19,7 @@ interface DiscussionTableProps {
 const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
   return (
     <>
-      {discussions ? (
+      {discussions && discussions.length > 0 ? (
         <Table className="max-w-full  max-h-80">
           <TableHeader>
             <TableRow>
@@ -44,13 +44,13 @@ const DiscussionTable: React.FC<DiscussionTableProps> = ({ discussions }) => {
                 <TableCell className="text-left line-clamp-2 pl-2">
                   <Link
                     className="hover:text-background hover:underline transition-all duration-100 "
-                    href={"/discussins/" + el.id}
+                    href={"/discussions/" + el.id}
                   >
                     {el.title}
                   </Link>
                 </TableCell>
                 <TableCell className="p-[1px]  ">
-                  {el.opinions.length || 0}
+                  {el?.opinions?.length || 0}
                 </TableCell>
                 <TableCell className="text-nowrap ">
                   {new Date(el.createdAt).toLocaleDateString()}

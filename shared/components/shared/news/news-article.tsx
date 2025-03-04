@@ -1,11 +1,11 @@
 "use client";
 import { cn } from "@/shared/lib/utils";
-import { createComment, fetchNewsById } from "@/shared/services";
+import { createComment, deleteComment, fetchNewsById } from "@/shared/services";
 import { useAppSelector } from "@/shared/store/store";
 import { News, Role } from "@/types";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   Comments,
   MiniGallery,
@@ -31,6 +31,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
     getMore,
     isNext,
     isLoading: isLoadingComments,
+    deleteComment: deleteCommentLocal,
   } = useFetchComments(id);
   const { currentUser } = useAppSelector((state) => state.user);
 
@@ -64,6 +65,23 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
     }
   };
 
+  const handleDeleteComment = useCallback(async (id: string) => {
+    try {
+      await deleteComment(id);
+      deleteCommentLocal(id);
+      toast.success("Коментар успішно видалено!");
+    } catch (err: unknown) {
+      console.log(err);
+      toast.error("Помилка при видаленні коментаря!");
+    }
+  }, []);
+
+  const isAvailableToDelete = useCallback(
+    (authourId: string) => {
+      return authourId === currentUser?.id || currentUser?.role === Role.ADMIN;
+    },
+    [currentUser]
+  );
   useEffect(() => {
     const getNews = async () => {
       try {
@@ -166,6 +184,8 @@ const NewsArticle: React.FC<NewsArticleProps> = ({ id, className }) => {
             isLoading={isLoadingComments}
             isNext={isNext}
             getMore={getMore}
+            onDelete={handleDeleteComment}
+            isAvailableToDelete={isAvailableToDelete}
           />
         </>
       )}

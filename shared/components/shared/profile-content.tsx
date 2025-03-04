@@ -1,6 +1,10 @@
 "use client";
 import { cn } from "@/shared/lib/utils";
-import { fetchDiscussions, fetchUserByIdOrEmail } from "@/shared/services";
+import {
+  deleteUser,
+  fetchDiscussions,
+  fetchUserByIdOrEmail,
+} from "@/shared/services";
 import { useAppDispatch, useAppSelector } from "@/shared/store/store";
 import { Discussion, PaginatedResponse, User } from "@/types";
 import { Loader2 } from "lucide-react";
@@ -10,6 +14,8 @@ import React from "react";
 import { Button } from "../ui";
 import { apiLogoutUser } from "@/shared/store/user/operations";
 import { DiscussionTable, PopupConfirm } from "@/shared/components/shared";
+import toast from "react-hot-toast";
+import { clearCurrentUser } from "@/shared/store/user/slice";
 
 interface ProfileContentProps {
   className?: string;
@@ -40,6 +46,25 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
       }
     } catch (error) {
       console.error("Failed to fetch user data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      if (currentUser?.id) {
+        setLoading(true);
+        const res = await deleteUser(currentUser.id);
+        if ("error" in res) {
+          throw new Error(res.error);
+        }
+        dispatch(clearCurrentUser());
+        toast.success("Користувач успішно видалено!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Помилка при видаленні користувача! ");
     } finally {
       setLoading(false);
     }
@@ -118,7 +143,7 @@ const ProfileContent: React.FC<ProfileContentProps> = ({ className }) => {
               >
                 Вийти
               </Button>
-              <PopupConfirm onClick={() => {}}>
+              <PopupConfirm onClick={handleDelete}>
                 <Button className="max-sm:w-full bg-red-700 text-white rounded-xl shadow-md active:translate-y-[2px] hover:opacity-70 transition-all duration-200 hover:scale-105">
                   Видалити акаунт
                 </Button>

@@ -1,7 +1,7 @@
 import { Opinion, Comment as TComment } from "@/types";
 import { memo } from "react";
 import { Button } from "@/shared/components/ui";
-import { Loader } from "lucide-react";
+import { Loader, Trash2 } from "lucide-react";
 
 interface CommentsProps {
   comments: TComment[] | Opinion[];
@@ -9,6 +9,8 @@ interface CommentsProps {
   isLoading?: boolean;
   isNext?: boolean;
   getMore?: () => void;
+  onDelete: (id: string) => void;
+  isAvailableToDelete: (authourId: string) => boolean;
 }
 
 const CommentsComponent: React.FC<CommentsProps> = ({
@@ -17,6 +19,8 @@ const CommentsComponent: React.FC<CommentsProps> = ({
   isNext,
   getMore,
   isLoading,
+  onDelete,
+  isAvailableToDelete,
 }) => {
   return (
     <>
@@ -36,9 +40,22 @@ const CommentsComponent: React.FC<CommentsProps> = ({
                   ) : (
                     <p className="author">Гість</p>
                   )}
-                  <p className="date">
-                    {new Date(comment.createdAt).toLocaleDateString()}
-                  </p>
+                  <div className="flex  gap-5">
+                    <p className="date">
+                      {new Date(comment.createdAt).toLocaleDateString()}
+                    </p>
+                    {isAvailableToDelete(comment.authorId) && (
+                      <Button
+                        variant="ghost"
+                        className="p-0 h-[16px] w-[16px] hover:bg-transparent hover:text-accent"
+                        onClick={() => {
+                          onDelete(comment.id);
+                        }}
+                      >
+                        <Trash2 />
+                      </Button>
+                    )}
+                  </div>
                 </div>
                 <p className="text">{comment.content}</p>
               </li>

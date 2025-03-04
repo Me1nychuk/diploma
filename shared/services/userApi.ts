@@ -1,6 +1,7 @@
 import axios from "axios";
 import { axiosInstance } from "./axiosInstance";
 import { Role } from "@/types";
+import { GetUsersPayload } from "../store/data/operations";
 
 export const createUser = async () => {};
 export const updateUser = async (
@@ -84,15 +85,15 @@ export const getMe = async () => {
   }
 };
 export const fetchUsers = async ({
-  page = 1,
-  perPage = 10,
-}: {
-  page: number;
-  perPage: number;
-}) => {
+  page = "1",
+  perPage = "10",
+  order = "asc",
+  sortBy = "title",
+  nameOrEmail = "",
+}: GetUsersPayload) => {
   try {
     const response = await axiosInstance.get(
-      "/users?page=" + page + "&perPage=" + perPage
+      `/users?page=${page}&sortBy=${sortBy}&order=${order}&name-or-email=${nameOrEmail}&per_page=${perPage}`
     );
     return {
       statusCode: response.status,

@@ -22,8 +22,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // import toast from "react-hot-toast";
 
 export interface GetUsersPayload {
-  page: number;
-  perPage: number;
+  page: string;
+  perPage: string;
+  order: "asc" | "desc";
+  sortBy: "title" | "date";
+  nameOrEmail: string;
 }
 
 interface Error {

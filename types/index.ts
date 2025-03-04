@@ -50,7 +50,7 @@ export interface User {
   bio: string;
   role: Role;
   isVerified: boolean;
-  verificationToken: string;
+  verificationToken?: string;
   resetToken?: string;
   resetTokenExp?: string;
   tokens: Token[];

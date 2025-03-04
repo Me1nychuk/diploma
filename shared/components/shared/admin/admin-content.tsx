@@ -6,8 +6,20 @@ import { Role } from "@/types";
 import { ArrowLeft, Newspaper, Speech, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { NewsPanel } from "./news-panel";
-import { DiscussionPanel } from "./discussion-panel";
+import dynamic from "next/dynamic";
+
+const UsersPanel = dynamic(
+  () => import("./users-panel").then((mod) => mod.UsersPanel),
+  { ssr: false }
+);
+const NewsPanel = dynamic(
+  () => import("./news-panel").then((mod) => mod.NewsPanel),
+  { ssr: false }
+);
+const DiscussionPanel = dynamic(
+  () => import("./discussion-panel").then((mod) => mod.DiscussionPanel),
+  { ssr: false }
+);
 
 const AdminContent: React.FC = ({}) => {
   const { currentUser } = useAppSelector((state) => state.user);
@@ -65,7 +77,7 @@ const AdminContent: React.FC = ({}) => {
             <span>Дискусії</span>
           </li>
         </ul>
-        {chapter === "users" && <div>users</div>}
+        {chapter === "users" && <UsersPanel />}
         {chapter === "news" && <NewsPanel />}
         {chapter === "discussins" && <DiscussionPanel />}
       </div>

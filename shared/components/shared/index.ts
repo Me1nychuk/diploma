@@ -15,7 +15,7 @@ export { AboutUsContent } from "./about-us";
 // Authentication
 export { RegisterForm, LoginForm, AuthProvider } from "./auth";
 // Admin
-export { AdminContent } from "./admin";
+export { AdminContent, UsersPanel, NewsPanel, DiscussionPanel } from "./admin";
 // Discussions
 export {
   DiscussionsPageContent,
@@ -35,7 +35,13 @@ export {
   Header,
 } from "./header";
 // Controls
-export { Pagination, SelectSortType, SearchInput, Comments } from "./controls";
+export {
+  Pagination,
+  SelectSortType,
+  SearchInput,
+  Comments,
+  Modal,
+} from "./controls";
 // Edit
 export {
   EditArticleForm,
@@ -43,3 +49,7 @@ export {
   CreatePageContent,
   EditableList,
 } from "./edit";
+// Users
+export { UsersPageContent, UserList, UserArticle } from "./users";
+// Chat
+export { ChatContent } from "./chat";

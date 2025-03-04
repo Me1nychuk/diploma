@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User, News, Discussion, PaginatedResponse } from "@/types";
-import { apiGetDiscussions, apiGetNews } from "./operations";
+import { apiGetDiscussions, apiGetNews, apiGetUsers } from "./operations";
 
 export type DataType = {
   users: PaginatedResponse<User> | undefined;
@@ -74,6 +74,24 @@ const slice = createSlice({
         state.isError = true;
         state.errorMessage = String(action.error.message);
         state.data.discussions = undefined;
+      })
+      .addCase(apiGetUsers.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.errorMessage = "";
+        state.data.users = undefined;
+      })
+      .addCase(apiGetUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.errorMessage = "";
+        state.data.users = action.payload;
+      })
+      .addCase(apiGetUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.errorMessage = String(action.error.message);
+        state.data.users = undefined;
       }),
 });
 
